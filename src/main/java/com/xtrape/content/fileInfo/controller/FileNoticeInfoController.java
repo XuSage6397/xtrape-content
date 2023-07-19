@@ -6,7 +6,7 @@ package com.xtrape.content.fileInfo.controller;
  * @Date: 2022/1/1 0:36
  */
 
-import com.xtrape.common.core.web.controller.BaseController;
+import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.content.fileInfo.domain.FileNoticeInfo;
 import com.xtrape.content.fileInfo.domain.SysFileInfo;
 import com.xtrape.content.fileInfo.service.IFileNoticeInfoService;

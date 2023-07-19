@@ -3,7 +3,7 @@ package com.xtrape.content.comment.domain;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.annotation.Excel;
-import com.xtrape.common.core.web.domain.BaseEntity;
+import com.xtrape.common.security.web.domain.BaseEntity;
 
 import java.util.List;
 

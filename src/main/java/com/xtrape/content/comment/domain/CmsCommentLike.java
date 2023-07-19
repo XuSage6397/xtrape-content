@@ -6,7 +6,7 @@ package com.xtrape.content.comment.domain;
  * @Date: 2022/1/22 17:48
  */
 
-import com.xtrape.common.core.web.domain.BaseEntity;
+import com.xtrape.common.security.web.domain.BaseEntity;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 

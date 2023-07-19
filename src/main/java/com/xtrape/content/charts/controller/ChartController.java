@@ -6,7 +6,7 @@ package com.xtrape.content.charts.controller;
  * @Date: 2022/4/25 10:37
  */
 
-import com.xtrape.common.core.web.controller.BaseController;
+import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.charts.service.IChartService;
 import com.xtrape.content.comment.domain.CmsComment;
@@ -17,7 +17,7 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
-import com.xtrape.common.core.web.SecurityUtils;
+import com.xtrape.common.security.utils.SecurityUtils;
 import com.xtrape.system.service.impl.SysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
