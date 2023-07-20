@@ -32,7 +32,7 @@ import com.xtrape.content.tag.domain.CmsTag;
  * @date 2022-01-02
  */
 @RestController
-@RequestMapping("/cms/tag")
+@RequestMapping("/tag")
 public class CmsTagController extends BaseController
 {
     @Autowired

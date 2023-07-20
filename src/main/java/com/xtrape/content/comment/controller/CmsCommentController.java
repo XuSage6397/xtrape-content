@@ -33,7 +33,7 @@ import com.xtrape.content.comment.domain.CmsComment;
  * @date 2022-01-21
  */
 @RestController
-@RequestMapping("/cms/comment")
+@RequestMapping("/comment")
 public class CmsCommentController extends BaseController
 {
     @Autowired

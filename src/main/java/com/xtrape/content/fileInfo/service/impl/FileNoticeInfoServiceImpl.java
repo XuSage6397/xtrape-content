@@ -19,29 +19,29 @@ import java.util.List;
  * @Description:〈〉
  * @Date: 2021/12/31 23:33
  **/
-//@Service
-//public class FileNoticeInfoServiceImpl implements IFileNoticeInfoService {
-//
-//    @Autowired
-//    private FileNoticeInfoMapper fileNoticeInfoMapper;
-//
-//    @Override
-//    public int batchFileNotice(List<FileNoticeInfo> fileNoticeList) {
-//        return fileNoticeInfoMapper.batchFileNotice(fileNoticeList);
-//    }
-//
-//    @Override
-//    public int deleteFileNoticeByNoticeId(Long noticeId) {
-//        return fileNoticeInfoMapper.deleteFileNoticeByNoticeId(noticeId);
-//    }
-//
-//    @Override
-//    public int deleteFileNotice(Long[] ids) {
-//        return fileNoticeInfoMapper.deleteFileNotice(ids);
-//    }
-//
-//    @Override
-//    public List<FileNoticeInfo> selectFileNoticeList(Long noticeId) {
-//        return fileNoticeInfoMapper.selectFileNoticeList(noticeId);
-//    }
-//}
+@Service
+public class FileNoticeInfoServiceImpl implements IFileNoticeInfoService {
+
+    @Autowired
+    private FileNoticeInfoMapper fileNoticeInfoMapper;
+
+    @Override
+    public int batchFileNotice(List<FileNoticeInfo> fileNoticeList) {
+        return fileNoticeInfoMapper.batchFileNotice(fileNoticeList);
+    }
+
+    @Override
+    public int deleteFileNoticeByNoticeId(Long noticeId) {
+        return fileNoticeInfoMapper.deleteFileNoticeByNoticeId(noticeId);
+    }
+
+    @Override
+    public int deleteFileNotice(Long[] ids) {
+        return fileNoticeInfoMapper.deleteFileNotice(ids);
+    }
+
+    @Override
+    public List<FileNoticeInfo> selectFileNoticeList(Long noticeId) {
+        return fileNoticeInfoMapper.selectFileNoticeList(noticeId);
+    }
+}

@@ -1,17 +1,17 @@
 package com.xtrape.content.fileInfo.service.impl;
 
-import java.util.List;
-
 import com.xtrape.common.core.config.XtrapeConfig;
 import com.xtrape.common.core.constant.Constants;
 import com.xtrape.common.core.utils.DateUtils;
 import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.utils.file.FileUtils;
+import com.xtrape.content.fileInfo.domain.SysFileInfo;
+import com.xtrape.content.fileInfo.mapper.SysFileInfoMapper;
+import com.xtrape.content.fileInfo.service.ISysFileInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.xtrape.content.fileInfo.mapper.SysFileInfoMapper;
-import com.xtrape.content.fileInfo.domain.SysFileInfo;
-import com.xtrape.content.fileInfo.service.ISysFileInfoService;
+
+import java.util.List;
 
 /**
  * 文件管理Service业务层处理
@@ -20,7 +20,7 @@ import com.xtrape.content.fileInfo.service.ISysFileInfoService;
  * @date 2021-12-29
  */
 @Service
-public class SysFileInfoServiceImpl implements ISysFileInfoService 
+public class SysFileInfoServiceImpl implements ISysFileInfoService
 {
     @Autowired
     private SysFileInfoMapper sysFileInfoMapper;

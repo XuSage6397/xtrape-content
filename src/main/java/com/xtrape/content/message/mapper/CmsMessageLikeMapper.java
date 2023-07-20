@@ -1,5 +1,6 @@
 package com.xtrape.content.message.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.message.domain.CmsMessageLike;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description: 〈数据层〉
  * @Date: 2022/1/19 8:42
  */
-public interface CmsMessageLikeMapper {
+public interface CmsMessageLikeMapper extends BaseMapper<CmsMessageLike> {
     /**
      * 查询列表
      */

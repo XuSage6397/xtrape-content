@@ -1,6 +1,8 @@
 package com.xtrape.content.blog.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.blog.domain.CmsBlog;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * @author ning
  * @date 2022-01-01
  */
-public interface CmsBlogMapper 
+public interface CmsBlogMapper extends BaseMapper<CmsBlog>
 {
     /**
      * 查询文章管理

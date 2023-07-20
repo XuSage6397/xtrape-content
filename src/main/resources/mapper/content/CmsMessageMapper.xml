@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xtrape.content.message.mapper.CmsMessageMapper">
     
-    <resultMap type="CmsMessage" id="CmsMessageResult">
+    <resultMap type="com.xtrape.content.message.domain.CmsMessage" id="CmsMessageResult">
         <result property="id"    column="id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="mainId"    column="main_id"    />
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, parent_id, main_id, like_num, content, type, blog_id, user_id, del_flag, create_by, create_time, update_by, update_time from cms_message
     </sql>
 
-    <select id="selectCmsMessageList" parameterType="CmsMessage" resultMap="CmsMessageResult">
+    <select id="selectCmsMessageList" resultMap="CmsMessageResult">
         <include refid="selectCmsMessageVo"/>
         <where>  
             <if test="parentId != null "> and parent_id = #{parentId}</if>
@@ -40,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY create_time DESC
     </select>
 
-    <select id="selectChildMessageList" parameterType="CmsMessage" resultMap="CmsMessageResult">
+    <select id="selectChildMessageList" resultMap="CmsMessageResult">
         <include refid="selectCmsMessageVo"/>
         <where>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
@@ -70,7 +70,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
-    <insert id="insertCmsMessage" parameterType="CmsMessage" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertCmsMessage" useGeneratedKeys="true" keyProperty="id">
         insert into cms_message
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="parentId != null">parent_id,</if>
@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCmsMessage" parameterType="CmsMessage">
+    <update id="updateCmsMessage">
         update cms_message
         <trim prefix="SET" suffixOverrides=",">
             <if test="parentId != null">parent_id = #{parentId},</if>

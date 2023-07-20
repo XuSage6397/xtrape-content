@@ -1,5 +1,6 @@
 package com.xtrape.content.blog.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.blog.domain.CmsBlogType;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description: 〈blog分类关联 数据层〉
  * @Date: 2022/1/2 23:37
  */
-public interface CmsBlogTypeMapper {
+public interface CmsBlogTypeMapper extends BaseMapper<CmsBlogType> {
     /**
      * 批量新增
      */

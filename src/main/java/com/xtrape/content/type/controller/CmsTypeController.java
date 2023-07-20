@@ -32,7 +32,7 @@ import com.xtrape.content.type.service.ICmsTypeService;
  * @date 2022-01-02
  */
 @RestController
-@RequestMapping("/cms/type")
+@RequestMapping("/type")
 public class CmsTypeController extends BaseController
 {
     @Autowired

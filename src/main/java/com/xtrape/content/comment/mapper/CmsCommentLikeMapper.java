@@ -1,5 +1,6 @@
 package com.xtrape.content.comment.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.comment.domain.CmsCommentLike;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description: 〈${DESCRIPTION}〉
  * @Date: 2022/1/22 20:08
  */
-public interface CmsCommentLikeMapper {
+public interface CmsCommentLikeMapper extends BaseMapper<CmsCommentLike> {
     /**
      * 查询列表
      */

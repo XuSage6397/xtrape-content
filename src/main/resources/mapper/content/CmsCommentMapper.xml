@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xtrape.content.comment.mapper.CmsCommentMapper">
     
-    <resultMap type="CmsComment" id="CmsCommentResult">
+    <resultMap type="com.xtrape.content.comment.domain.CmsComment" id="CmsCommentResult">
         <result property="id"    column="id"    />
         <result property="parentId"    column="parent_id"    />
         <result property="mainId"    column="main_id"    />
@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, parent_id, main_id, like_num, content, type, blog_id, del_flag, user_id, create_by, create_time, update_by, update_time from cms_comment
     </sql>
 
-    <select id="selectCmsCommentList" parameterType="CmsComment" resultMap="CmsCommentResult">
+    <select id="selectCmsCommentList" resultMap="CmsCommentResult">
         select c.id, c.parent_id, c.main_id, c.like_num, c.content, c.type, c.blog_id, c.del_flag, c.user_id, c.create_by, c.create_time, c.update_by, c.update_time from cms_comment c LEFT JOIN cms_blog b ON c.blog_id = b.id
         <where>  
             <if test="parentId != null "> and c.parent_id = #{parentId}</if>
@@ -47,7 +47,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectCmsCommentVo"/>
         where id = #{id}
     </select>
-    <select id="selectChildCommentList" parameterType="CmsComment" resultMap="CmsCommentResult">
+    <select id="selectChildCommentList" resultMap="CmsCommentResult">
         <include refid="selectCmsCommentVo"/>
         <where>
             <if test="parentId != null "> and parent_id = #{parentId}</if>
@@ -72,7 +72,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
     </select>
 
-    <insert id="insertCmsComment" parameterType="CmsComment" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertCmsComment" useGeneratedKeys="true" keyProperty="id">
         insert into cms_comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="parentId != null">parent_id,</if>
@@ -104,7 +104,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCmsComment" parameterType="CmsComment">
+    <update id="updateCmsComment">
         update cms_comment
         <trim prefix="SET" suffixOverrides=",">
             <if test="parentId != null">parent_id = #{parentId},</if>

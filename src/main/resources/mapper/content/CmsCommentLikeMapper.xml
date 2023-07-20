@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xtrape.content.comment.mapper.CmsCommentLikeMapper">
-    <resultMap type="CmsCommentLike" id="commentLikeResult">
+    <resultMap type="com.xtrape.content.comment.domain.CmsCommentLike" id="commentLikeResult">
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -14,7 +14,7 @@
         select create_by, create_time, update_by, update_time, comment_id, user_id from cms_comment_like
     </sql>
 
-    <select id="selectCmsCommentLikeList" parameterType="CmsCommentLike" resultMap="commentLikeResult">
+    <select id="selectCmsCommentLikeList" resultMap="commentLikeResult">
         <include refid="selectCmsMessageLikeVo"/>
         <where>
             <if test="commentId != null"> and comment_id = #{commentId}</if>
@@ -22,7 +22,7 @@
         </where>
     </select>
 
-    <insert id="addCmsCommentLike" parameterType="CmsCommentLike">
+    <insert id="addCmsCommentLike" >
         insert into cms_comment_like
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="createBy != null">create_by,</if>
@@ -42,7 +42,7 @@
         </trim>
     </insert>
 
-    <delete id="deleteCmsCommentLike" parameterType="CmsCommentLike">
+    <delete id="deleteCmsCommentLike" >
         delete from cms_comment_like
         <where>
             <if test="commentId != null"> and comment_id = #{commentId}</if>

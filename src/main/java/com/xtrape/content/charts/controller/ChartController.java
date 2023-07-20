@@ -33,7 +33,7 @@ import java.util.*;
  * @Date: 2022/4/25 10:37
  **/
 @RestController
-@RequestMapping("/cms/chart")
+@RequestMapping("/chart")
 public class ChartController extends BaseController {
     @Autowired
     private IChartService chartService;

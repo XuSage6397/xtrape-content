@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xtrape.content.blog.mapper.CmsBlogTagMapper">
-    <resultMap type="cmsBlogTag" id="blogTagResult">
+    <resultMap type="com.xtrape.content.blog.domain.CmsBlogTag" id="blogTagResult">
         <result property="tagId"       column="tag_id"       />
         <result property="blogId"    column="blog_id"    />
     </resultMap>

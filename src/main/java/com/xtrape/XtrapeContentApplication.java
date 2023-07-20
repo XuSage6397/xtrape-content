@@ -1,4 +1,4 @@
-package com.xtrape.content;
+package com.xtrape;
 
 import com.xtrape.common.security.annotation.EnableCustomConfig;
 import com.xtrape.common.security.annotation.EnableRyFeignClients;
@@ -16,9 +16,9 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @EnableCustomConfig
 @EnableCustomSwagger2
 @EnableRyFeignClients
-@SpringBootApplication
 @EnableAsync(proxyTargetClass = true)
 @EnableCaching(proxyTargetClass = true)
+@SpringBootApplication
 public class XtrapeContentApplication {
     public static void main(String[] args) {
         SpringApplication.run(XtrapeContentApplication.class, args);

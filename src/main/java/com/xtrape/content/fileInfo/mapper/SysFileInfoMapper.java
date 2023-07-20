@@ -1,6 +1,8 @@
 package com.xtrape.content.fileInfo.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.fileInfo.domain.SysFileInfo;
 
 /**
@@ -9,7 +11,7 @@ import com.xtrape.content.fileInfo.domain.SysFileInfo;
  * @author xtrape
  * @date 2021-12-29
  */
-public interface SysFileInfoMapper
+public interface SysFileInfoMapper extends BaseMapper<SysFileInfo>
 {
     /**
      * 查询文件管理

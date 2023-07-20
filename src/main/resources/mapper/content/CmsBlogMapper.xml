@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xtrape.content.blog.mapper.CmsBlogMapper">
     
-    <resultMap type="CmsBlog" id="CmsBlogResult">
+    <resultMap type="com.xtrape.content.blog.domain.CmsBlog" id="CmsBlogResult">
         <result property="id"    column="id"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -29,7 +29,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, create_by, create_time, update_by, update_time, title, type, content, content_type, content_markdown, Top, views, status, blog_pic_type, blog_pic, blog_pic_link, blog_desc, blog_files from cms_blog
     </sql>
 
-    <select id="selectCmsBlogList" parameterType="CmsBlog" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogList" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
         <where>  
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
@@ -59,7 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="id != null  and id != ''"> and id in (SELECT blog_id FROM cms_blog_tag WHERE tag_id  = #{id})</if>
         </where>
     </select>
-    <select id="selectCmsBlogListRecommend" parameterType="CmsBlog" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListRecommend" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
@@ -86,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY Top DESC, create_time DESC
     </select>
 
-    <insert id="insertCmsBlog" parameterType="CmsBlog" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertCmsBlog" useGeneratedKeys="true" keyProperty="id">
         insert into cms_blog
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="createBy != null">create_by,</if>
@@ -128,7 +128,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCmsBlog" parameterType="CmsBlog">
+    <update id="updateCmsBlog">
         update cms_blog
         <trim prefix="SET" suffixOverrides=",">
             <if test="createBy != null">create_by = #{createBy},</if>

@@ -2,6 +2,7 @@ package com.xtrape.content.type.mapper;
 
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.type.domain.CmsType;
 
 /**
@@ -10,7 +11,7 @@ import com.xtrape.content.type.domain.CmsType;
  * @author ning
  * @date 2022-01-02
  */
-public interface CmsTypeMapper 
+public interface CmsTypeMapper extends BaseMapper<CmsType>
 {
     /**
      * 查询分类管理

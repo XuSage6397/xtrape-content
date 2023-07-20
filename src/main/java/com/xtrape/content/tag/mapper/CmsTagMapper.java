@@ -1,6 +1,8 @@
 package com.xtrape.content.tag.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.tag.domain.CmsTag;
 
 /**
@@ -9,7 +11,7 @@ import com.xtrape.content.tag.domain.CmsTag;
  * @author ning
  * @date 2022-01-02
  */
-public interface CmsTagMapper 
+public interface CmsTagMapper extends BaseMapper<CmsTag>
 {
     /**
      * 查询标签管理

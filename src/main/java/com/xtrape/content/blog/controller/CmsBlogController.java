@@ -16,11 +16,7 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
-//import com.xtrape.common.utils.SecurityUtils;
-//import com.xtrape.common.utils.StringUtils;
-//import com.xtrape.framework.web.service.SysPermissionService;
-//import org.springframework.security.access.prepost.PreAuthorize;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,7 +44,7 @@ import com.xtrape.content.blog.service.ICmsBlogService;
  * @date 2022-01-01
  */
 @RestController
-@RequestMapping("/cms/blog")
+@RequestMapping("/blog")
 public class CmsBlogController extends BaseController
 {
     @Autowired
@@ -61,7 +57,7 @@ public class CmsBlogController extends BaseController
     private ICmsTagService cmsTagService;
 
     @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
     @Autowired
     private ISysFileInfoService sysFileInfoService;
@@ -69,7 +65,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页查询文章列表
      */
-    @GetMapping("/cms/cmsList")
+    @GetMapping("/cmsList")
     public TableDataInfo cmsList(CmsBlog cmsBlog)
     {
         startPage();
@@ -82,7 +78,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页获取文章详细信息
      */
-    @GetMapping(value = { "/cms/detail/", "/cms/detail/{id}" })
+    @GetMapping(value = { "/detail/", "/detail/{id}" })
     public AjaxResult getInfoDetail(@PathVariable(value = "id", required = false) Long id)
     {
         AjaxResult ajax = AjaxResult.success();
@@ -100,7 +96,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页按分类查询文章列表
      */
-    @GetMapping("/cms/cmsListByType/{id}")
+    @GetMapping("/cmsListByType/{id}")
     public TableDataInfo cmsListByTypeId(@PathVariable(value = "id", required = false) Long id)
     {
         startPage();
@@ -111,7 +107,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页按标签查询文章列表
      */
-    @GetMapping("/cms/cmsListByTag/{id}")
+    @GetMapping("/cmsListByTag/{id}")
     public TableDataInfo cmsListByTagId(@PathVariable(value = "id", required = false) Long id)
     {
         startPage();
@@ -122,7 +118,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页查询推荐文章列表
      */
-    @GetMapping("/cms/cmsListRecommend")
+    @GetMapping("/cmsListRecommend")
     public TableDataInfo cmsListRecommend(CmsBlog cmsBlog)
     {
         startPage();
@@ -135,7 +131,7 @@ public class CmsBlogController extends BaseController
     /**
      * 首页增加阅读量
      */
-    @GetMapping("/cms/addBlogViews/{id}")
+    @GetMapping("/addBlogViews/{id}")
     public AjaxResult addBlogViews(@PathVariable(value = "id", required = false) Long id)
     {
         CmsBlog cmsBlog = cmsBlogService.selectCmsBlogById(id);
@@ -149,7 +145,7 @@ public class CmsBlogController extends BaseController
     /**
      * 随笔页查询文章列表
      */
-    @GetMapping("/cms/cmsEssayList")
+    @GetMapping("/cmsEssayList")
     public TableDataInfo cmsEssayList(CmsBlog cmsBlog)
     {
         startPage();

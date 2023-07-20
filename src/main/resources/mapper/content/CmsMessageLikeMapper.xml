@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.xtrape.content.message.mapper.CmsMessageLikeMapper">
-    <resultMap type="CmsMessageLike" id="messageLikeResult">
+    <resultMap type="com.xtrape.content.message.domain.CmsMessageLike" id="messageLikeResult">
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -14,7 +14,7 @@
         select create_by, create_time, update_by, update_time, message_id, user_id from cms_message_like
     </sql>
 
-    <select id="selectCmsMessageLikeList" parameterType="CmsMessageLike" resultMap="messageLikeResult">
+    <select id="selectCmsMessageLikeList" resultMap="messageLikeResult">
         <include refid="selectCmsMessageLikeVo"/>
         <where>
             <if test="messageId != null"> and message_id = #{messageId}</if>
@@ -22,7 +22,7 @@
         </where>
     </select>
 
-    <insert id="addCmsMessageLike" parameterType="CmsMessageLike">
+    <insert id="addCmsMessageLike" >
         insert into cms_message_like
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="createBy != null">create_by,</if>
@@ -42,7 +42,7 @@
         </trim>
     </insert>
 
-    <delete id="deleteCmsMessageLike" parameterType="CmsMessageLike">
+    <delete id="deleteCmsMessageLike" >
         delete from cms_message_like
         <where>
             <if test="messageId != null"> and message_id = #{messageId}</if>

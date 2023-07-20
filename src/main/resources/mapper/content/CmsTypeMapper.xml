@@ -4,7 +4,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xtrape.content.type.mapper.CmsTypeMapper">
     
-    <resultMap type="CmsType" id="CmsTypeResult">
+    <resultMap type="com.xtrape.content.type.domain.CmsType" id="CmsTypeResult">
         <result property="typeId"    column="type_id"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
@@ -20,7 +20,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select type_id, create_by, create_time, update_by, update_time, type_name, type_pic_type, type_pic, type_pic_link from cms_type
     </sql>
 
-    <select id="selectCmsTypeList" parameterType="CmsType" resultMap="CmsTypeResult">
+    <select id="selectCmsTypeList" resultMap="CmsTypeResult">
         <include refid="selectCmsTypeVo"/>
         <where>  
             <if test="typeName != null  and typeName != ''"> and type_name like concat('%', #{typeName}, '%')</if>
@@ -39,7 +39,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where type_name = #{typeName}
     </select>
 
-    <insert id="insertCmsType" parameterType="CmsType" useGeneratedKeys="true" keyProperty="typeId">
+    <insert id="insertCmsType" useGeneratedKeys="true" keyProperty="typeId">
         insert into cms_type
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="createBy != null">create_by,</if>
@@ -63,7 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          </trim>
     </insert>
 
-    <update id="updateCmsType" parameterType="CmsType">
+    <update id="updateCmsType" >
         update cms_type
         <trim prefix="SET" suffixOverrides=",">
             <if test="createBy != null">create_by = #{createBy},</if>

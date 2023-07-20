@@ -1,6 +1,8 @@
 package com.xtrape.content.comment.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.comment.domain.CmsComment;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * @author ning
  * @date 2022-01-21
  */
-public interface CmsCommentMapper 
+public interface CmsCommentMapper extends BaseMapper<CmsComment>
 {
     /**
      * 查询评论管理

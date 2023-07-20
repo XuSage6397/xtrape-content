@@ -1,6 +1,8 @@
 package com.xtrape.content.message.mapper;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.message.domain.CmsMessage;
 import org.apache.ibatis.annotations.Param;
 
@@ -10,7 +12,7 @@ import org.apache.ibatis.annotations.Param;
  * @author ning
  * @date 2022-01-15
  */
-public interface CmsMessageMapper 
+public interface CmsMessageMapper extends BaseMapper<CmsMessage>
 {
     /**
      * 查询留言管理

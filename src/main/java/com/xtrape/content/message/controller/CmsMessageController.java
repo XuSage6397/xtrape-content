@@ -33,7 +33,7 @@ import com.xtrape.common.core.web.domain.AjaxResult;
  * @date 2022-01-15
  */
 @RestController
-@RequestMapping("/cms/message")
+@RequestMapping("/message")
 public class CmsMessageController extends BaseController
 {
     @Autowired
