@@ -10,7 +10,7 @@ import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.security.utils.SecurityUtils;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class CmsTypeController extends BaseController
     private ICmsTypeService cmsTypeService;
 
     @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
     /**
      * 查询分类管理列表

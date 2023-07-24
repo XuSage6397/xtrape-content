@@ -36,8 +36,3 @@ spring:
           data-id: ${spring.application.name}.${spring.cloud.nacos.config.file-extension}
           group: ${spring.cloud.nacos.group}
           refresh: true
-
-xtrape:
-  module:
-    storage: something-will-be-removed
-    system: something-will-be-removed

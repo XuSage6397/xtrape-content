@@ -11,7 +11,7 @@ import com.xtrape.common.security.utils.SecurityUtils;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.tag.service.ICmsTagService;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,7 @@ public class CmsTagController extends BaseController
     private ICmsTagService cmsTagService;
 
     @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
     /**
      * 查询标签管理列表

@@ -95,7 +95,6 @@
             <artifactId>jakarta.mail</artifactId>
         </dependency>
 
-
         <!-- https://mvnrepository.com/artifact/org.web3j/crypto -->
         <dependency>
             <groupId>org.web3j</groupId>

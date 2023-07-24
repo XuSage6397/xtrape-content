@@ -12,7 +12,7 @@ import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.comment.domain.CmsCommentLike;
 import com.xtrape.content.comment.service.ICmsCommentService;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +40,7 @@ public class CmsCommentController extends BaseController
     private ICmsCommentService cmsCommentService;
 
     @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
 
     /**

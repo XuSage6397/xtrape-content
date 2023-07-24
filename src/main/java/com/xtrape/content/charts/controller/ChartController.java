@@ -18,7 +18,7 @@ import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
 import com.xtrape.common.security.utils.SecurityUtils;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +51,7 @@ public class ChartController extends BaseController {
     private ICmsMessageService cmsMessageService;
 
 //    @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
     /**
      * 查询总阅读量/文章总数/评论总数/留言总数

@@ -13,7 +13,7 @@ import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.message.domain.CmsMessageLike;
 import com.xtrape.content.message.domain.CmsMessage;
 import com.xtrape.content.message.service.ICmsMessageService;
-import com.xtrape.system.service.impl.SysPermissionService;
+import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,7 +40,7 @@ public class CmsMessageController extends BaseController
     private ICmsMessageService cmsMessageService;
 
     @Autowired
-    private SysPermissionService permissionService;
+    private ISysPermissionService permissionService;
 
     /**
      * 首页查询留言列表

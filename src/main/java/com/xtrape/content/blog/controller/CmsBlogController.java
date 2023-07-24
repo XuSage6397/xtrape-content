@@ -1,9 +1,12 @@
 package com.xtrape.content.blog.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javax.servlet.http.HttpServletResponse;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.web.domain.AjaxResult;
 import com.xtrape.common.core.enums.BusinessType;
@@ -11,12 +14,14 @@ import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.security.utils.SecurityUtils;
 import com.xtrape.common.core.web.page.TableDataInfo;
+import com.xtrape.content.feign.SystemFeignService;
 import com.xtrape.content.fileInfo.service.ISysFileInfoService;
 import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
 import com.xtrape.system.service.ISysPermissionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,14 +32,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-//import com.xtrape.common.annotation.Log;
 import com.xtrape.common.security.web.controller.BaseController;
-//import com.xtrape.common.core.web.domain.AjaxResult;
-//import com.xtrape.common.enums.BusinessType;
 import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.blog.service.ICmsBlogService;
-//import com.xtrape.common.utils.poi.ExcelUtil;
-//import com.xtrape.common.core.page.TableDataInfo;
 
 
 /**
@@ -43,6 +43,7 @@ import com.xtrape.content.blog.service.ICmsBlogService;
  * @author ning
  * @date 2022-01-01
  */
+@Slf4j
 @RestController
 @RequestMapping("/blog")
 public class CmsBlogController extends BaseController
@@ -61,6 +62,9 @@ public class CmsBlogController extends BaseController
 
     @Autowired
     private ISysFileInfoService sysFileInfoService;
+
+    @Autowired
+    SystemFeignService systemFeignService;
 
     /**
      * 首页查询文章列表
@@ -163,9 +167,12 @@ public class CmsBlogController extends BaseController
     public TableDataInfo list(CmsBlog cmsBlog)
     {
         startPage();
+        AjaxResult roleResult = systemFeignService.listMnemonicByMemberPortal();
+        log.info("systemFeignService: {}", roleResult);
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
-        if (!SecurityUtils.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+        List<String> roles = (List<String>)roleResult.get("data");
+        if (!roles.isEmpty()) {
+            // TODO: 验证当前模块的权限和当前用户权限是否匹配。 注意： 模块权限在 System 中限制， 这里不需要验证。
             cmsBlog.setCreateBy(getUsername());
         }
         List<CmsBlog> list = cmsBlogService.selectCmsBlogList(cmsBlog);
