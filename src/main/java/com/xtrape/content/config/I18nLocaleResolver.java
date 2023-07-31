@@ -3,9 +3,9 @@ package com.xtrape.content.config;
 import org.springframework.lang.Nullable;
 import org.springframework.web.servlet.LocaleResolver;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.constraints.NotNull;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.validation.constraints.NotNull;
 import java.util.Locale;
 
 public class I18nLocaleResolver implements LocaleResolver {

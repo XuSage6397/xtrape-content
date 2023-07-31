@@ -46,13 +46,11 @@
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-swagger-ui</artifactId>
-            <version>${swagger.fox.version}</version>
         </dependency>
 
-        <!-- Mysql Connector -->
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
         </dependency>
 
         <!-- xtrape Common DataSource -->
@@ -88,11 +86,6 @@
         <dependency>
             <groupId>jakarta.mail</groupId>
             <artifactId>jakarta.mail-api</artifactId>
-            <version>2.1.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.mail</groupId>
-            <artifactId>jakarta.mail</artifactId>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.web3j/crypto -->
@@ -109,8 +102,7 @@
         </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
-            <artifactId>hutool-http</artifactId>
-            <version>5.8.2</version>
+            <artifactId>hutool-all</artifactId>
         </dependency>
         <dependency>
             <groupId>com.xtrape</groupId>
