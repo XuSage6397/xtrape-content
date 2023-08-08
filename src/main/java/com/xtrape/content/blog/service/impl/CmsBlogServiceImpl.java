@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.xtrape.common.core.utils.DateUtils;
+import com.xtrape.content.blog.domain.CmsBlogSearch;
 import com.xtrape.content.blog.domain.CmsBlogTag;
 import com.xtrape.content.blog.domain.CmsBlogType;
 import com.xtrape.content.blog.mapper.CmsBlogTagMapper;
@@ -240,6 +241,13 @@ public class CmsBlogServiceImpl implements ICmsBlogService
         return cmsBlogMapper.deleteCmsBlogById(id);
     }
 
+    @Override
+    public List<CmsBlog> inquire(CmsBlogSearch cmsBlogSearch) {
+        List<CmsBlog> cmsBlogList = cmsBlogMapper.inquire(cmsBlogSearch);
+        List<CmsBlog> blogList = BlogListAddTypeAndTag(cmsBlogList);
+        return blogList;
+    }
+
     private List<CmsBlog> BlogListAddTypeAndTag(List<CmsBlog> cmsBlogList){
         if (cmsBlogList==null||cmsBlogList.size()<0){
             return cmsBlogList;
@@ -267,4 +275,5 @@ public class CmsBlogServiceImpl implements ICmsBlogService
         }
         return cmsBlogList;
     }
+
 }

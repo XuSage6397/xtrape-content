@@ -99,7 +99,7 @@ public class CmsCommentController extends BaseController
     public TableDataInfo list(CmsComment cmsComment)
     {
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
             cmsComment.setCreateBy(getUsername());
         }

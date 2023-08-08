@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xtrape.content.blog.domain.CmsBlog;
+import com.xtrape.content.blog.domain.CmsBlogSearch;
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -14,6 +15,9 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface CmsBlogMapper extends BaseMapper<CmsBlog>
 {
+
+    List<CmsBlog> inquire(CmsBlogSearch cmsBlogSearch);
+
     /**
      * 查询文章管理
      * 

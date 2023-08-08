@@ -2,6 +2,7 @@ package com.xtrape.content.blog.service;
 
 import java.util.List;
 import com.xtrape.content.blog.domain.CmsBlog;
+import com.xtrape.content.blog.domain.CmsBlogSearch;
 
 /**
  * 文章管理Service接口
@@ -26,6 +27,8 @@ public interface ICmsBlogService
      * @return 文章管理集合
      */
     public List<CmsBlog> selectCmsBlogList(CmsBlog cmsBlog);
+
+    List<CmsBlog> inquire(CmsBlogSearch blogSearch);
 
     /**
      * 查询推荐文章列表

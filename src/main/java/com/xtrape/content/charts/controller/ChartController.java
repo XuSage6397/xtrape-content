@@ -65,7 +65,7 @@ public class ChartController extends BaseController {
         int views = 0;
         int message = 0;
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
             cmsBlog.setCreateBy(getUsername());
         }
@@ -130,7 +130,7 @@ public class ChartController extends BaseController {
         Date SunEnd = getFrontDayEnd(date, 0);
         datex.add(sd.format(SunBegin));
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
             cmsBlog.setCreateBy(getUsername());
         }
@@ -175,7 +175,7 @@ public class ChartController extends BaseController {
         List type = new ArrayList();
         List data = new ArrayList();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
             cmsType.setCreateBy(getUsername());
         }
@@ -201,7 +201,7 @@ public class ChartController extends BaseController {
         CmsTag cmsTag = new CmsTag();
         List tag = new ArrayList();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
             cmsTag.setCreateBy(getUsername());
         }
@@ -254,7 +254,7 @@ public class ChartController extends BaseController {
         Date SunEnd = getFrontDayEnd(date, 0);
         datex.add(sd.format(SunBegin));
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
             cmsBlog.setCreateBy(getUsername());
         }

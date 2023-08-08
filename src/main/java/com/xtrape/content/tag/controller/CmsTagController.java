@@ -50,7 +50,7 @@ public class CmsTagController extends BaseController
     {
         startPage();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUser());
+        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
         if (!SecurityUtils.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
             cmsTag.setCreateBy(getUsername());
         }

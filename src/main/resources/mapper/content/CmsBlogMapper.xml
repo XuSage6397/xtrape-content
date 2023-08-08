@@ -42,6 +42,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </where>
         ORDER BY Top DESC, create_time DESC
     </select>
+
+    <select id="inquire" resultMap="CmsBlogResult">
+        <include refid="selectCmsBlogVo"/>
+        <where>
+            <if test="title != null  and title != ''">
+                and title like concat('%', #{title}, '%')
+            </if>
+            <if test="type != null  and type != ''">
+                and type in (<foreach collection="types" item="item" separator=",">#{item}</foreach>)
+            </if>
+            <if test="content != null  and content != ''">
+                and content = #{content}
+            </if>
+            <if test="top != null  and top != ''">
+                and top in (<foreach collection="tops" item="item" separator=",">#{item}</foreach>)
+            </if>
+            <if test="views != null "> and views = #{views}</if>
+            <if test="status != null  and status != ''">
+                and status in (<foreach collection="statuses" item="item" separator=",">#{item}</foreach>)
+            </if>
+        </where>
+        ORDER BY Top DESC, create_time DESC
+    </select>
     
     <select id="selectCmsBlogById" parameterType="Long" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
