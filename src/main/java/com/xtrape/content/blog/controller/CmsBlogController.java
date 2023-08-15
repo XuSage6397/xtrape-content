@@ -1,18 +1,14 @@
 package com.xtrape.content.blog.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.TypeReference;
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.web.domain.AjaxResult;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.utils.SecurityUtils;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.feign.SystemFeignService;
 import com.xtrape.content.fileInfo.service.ISysFileInfoService;
@@ -173,7 +169,7 @@ public class CmsBlogController extends BaseController
         List<String> roles = (List<String>)roleResult.get("data");
         if (!roles.isEmpty()) {
             // TODO: 验证当前模块的权限和当前用户权限是否匹配。 注意： 模块权限在 System 中限制， 这里不需要验证。
-            cmsBlog.setCreateBy(getUsername());
+            cmsBlog.setCreateBy(getUserName());
         }
         List<CmsBlog> list = cmsBlogService.selectCmsBlogList(cmsBlog);
         return getDataTable(list);
@@ -219,7 +215,7 @@ public class CmsBlogController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsBlog cmsBlog)
     {
-        cmsBlog.setCreateBy(getUsername());
+        cmsBlog.setCreateBy(getUserName());
         Long blogId = cmsBlogService.insertCmsBlog(cmsBlog);
         if (blogId==null){
             return AjaxResult.error();
@@ -235,7 +231,7 @@ public class CmsBlogController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsBlog cmsBlog)
     {
-        cmsBlog.setUpdateBy(getUsername());
+        cmsBlog.setUpdateBy(getUserName());
         //删除原首图
         CmsBlog oldBlog = cmsBlogService.selectCmsBlogById(cmsBlog.getId());
         if (cmsBlog.getBlogPic().isEmpty()||!cmsBlog.getBlogPic().equals(oldBlog.getBlogPic())){

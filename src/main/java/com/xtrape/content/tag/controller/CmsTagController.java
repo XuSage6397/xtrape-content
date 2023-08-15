@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.utils.SecurityUtils;
+import com.xtrape.common.security.SecurityContext;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.tag.service.ICmsTagService;
@@ -51,8 +51,8 @@ public class CmsTagController extends BaseController
         startPage();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsTag.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+            cmsTag.setCreateBy(getUserName());
         }
         List<CmsTag> list = cmsTagService.selectCmsTagList(cmsTag);
         return getDataTable(list);
@@ -89,7 +89,7 @@ public class CmsTagController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsTag cmsTag)
     {
-        cmsTag.setCreateBy(getUsername());
+        cmsTag.setCreateBy(getUserName());
         return toAjax(cmsTagService.insertCmsTag(cmsTag));
     }
 
@@ -101,7 +101,7 @@ public class CmsTagController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsTag cmsTag)
     {
-        cmsTag.setUpdateBy(getUsername());
+        cmsTag.setUpdateBy(getUserName());
         return toAjax(cmsTagService.updateCmsTag(cmsTag));
     }
 

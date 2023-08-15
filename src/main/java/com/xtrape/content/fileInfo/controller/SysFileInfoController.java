@@ -8,7 +8,7 @@ import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.exception.ServiceException;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.utils.SecurityUtils;
+import com.xtrape.common.security.SecurityContext;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.system.service.ISysPermissionService;
@@ -57,7 +57,7 @@ public class SysFileInfoController extends BaseController
         }
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (SecurityUtils.isAdmin(getUserId())||roles.contains("admin")||roles.contains("cms")){
+        if (SecurityContext.isAdmin(getUserId())||roles.contains("admin")||roles.contains("cms")){
             sysFileInfo.setCreateBy("");
         }
         List<SysFileInfo> list = sysFileInfoService.selectSysFileInfoList(sysFileInfo);

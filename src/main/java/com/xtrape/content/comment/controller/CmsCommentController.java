@@ -7,7 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.utils.SecurityUtils;
+import com.xtrape.common.security.SecurityContext;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.comment.domain.CmsCommentLike;
@@ -100,8 +100,8 @@ public class CmsCommentController extends BaseController
     {
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsComment.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+            cmsComment.setCreateBy(getUserName());
         }
         cmsComment.setDelFlag("0");
         startPage();

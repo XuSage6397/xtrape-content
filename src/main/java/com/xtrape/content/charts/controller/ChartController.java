@@ -17,7 +17,7 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
-import com.xtrape.common.security.utils.SecurityUtils;
+import com.xtrape.common.security.SecurityContext;
 import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,8 +66,8 @@ public class ChartController extends BaseController {
         int message = 0;
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+            cmsBlog.setCreateBy(getUserName());
         }
         cmsBlog.setType("1");
         List<CmsBlog> blogList = chartService.selectList(cmsBlog);
@@ -131,8 +131,8 @@ public class ChartController extends BaseController {
         datex.add(sd.format(SunBegin));
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+            cmsBlog.setCreateBy(getUserName());
         }
         cmsBlog.setType("1");
         blogData.add(chartService.selectListBetweenCreateTime(cmsBlog,sf.format(MonBegin),sf.format(MonEnd)).size());
@@ -176,8 +176,8 @@ public class ChartController extends BaseController {
         List data = new ArrayList();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsType.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+            cmsType.setCreateBy(getUserName());
         }
         List<CmsType> list = cmsTypeService.selectCmsTypeList(cmsType);
         for (CmsType cType : list) {
@@ -202,8 +202,8 @@ public class ChartController extends BaseController {
         List tag = new ArrayList();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsTag.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+            cmsTag.setCreateBy(getUserName());
         }
         List<CmsTag> list = cmsTagService.selectCmsTagList(cmsTag);
         for (CmsTag cTag : list) {
@@ -255,8 +255,8 @@ public class ChartController extends BaseController {
         datex.add(sd.format(SunBegin));
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityUtils.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUsername());
+        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+            cmsBlog.setCreateBy(getUserName());
         }
         cmsBlog.setType("2");
         List<CmsBlog> blogList = chartService.selectList(cmsBlog);
