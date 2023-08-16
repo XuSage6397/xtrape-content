@@ -17,7 +17,8 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
-import com.xtrape.common.security.SecurityContext;
+import com.xtrape.server.RequestContext;
+import com.xtrape.server.RequestContextHolder;
 import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -58,17 +59,20 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/total")
     public Map total() {
+        RequestContext requestContext = RequestContextHolder.take();
+
         Map total = new HashMap();
         CmsBlog cmsBlog = new CmsBlog();
         CmsComment cmsComment = new CmsComment();
         CmsMessage cmsMessage = new CmsMessage();
         int views = 0;
         int message = 0;
+
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+//            cmsBlog.setCreateBy(getUserName());
+//        }
         cmsBlog.setType("1");
         List<CmsBlog> blogList = chartService.selectList(cmsBlog);
         for (CmsBlog blog : blogList) {
@@ -90,6 +94,8 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/lineChart")
     public Map lineChart() {
+        RequestContext requestContext = RequestContextHolder.take();
+
         SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
         Map lineChart = new HashMap();
@@ -130,10 +136,10 @@ public class ChartController extends BaseController {
         Date SunEnd = getFrontDayEnd(date, 0);
         datex.add(sd.format(SunBegin));
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+//            cmsBlog.setCreateBy(getUserName());
+//        }
         cmsBlog.setType("1");
         blogData.add(chartService.selectListBetweenCreateTime(cmsBlog,sf.format(MonBegin),sf.format(MonEnd)).size());
         blogData.add(chartService.selectListBetweenCreateTime(cmsBlog,sf.format(TueBegin),sf.format(TueEnd)).size());
@@ -170,15 +176,17 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/pieChart")
     public Map pieChart() {
+        RequestContext requestContext = RequestContextHolder.take();
+
         Map pieChart = new HashMap();
         CmsType cmsType = new CmsType();
         List type = new ArrayList();
         List data = new ArrayList();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsType.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+//            cmsType.setCreateBy(getUserName());
+//        }
         List<CmsType> list = cmsTypeService.selectCmsTypeList(cmsType);
         for (CmsType cType : list) {
             Map typeMap = new HashMap();
@@ -197,14 +205,16 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/tagChart")
     public Map tagChart() {
+        RequestContext requestContext = RequestContextHolder.take();
+
         Map tagChart = new HashMap();
         CmsTag cmsTag = new CmsTag();
         List tag = new ArrayList();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsTag.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+//            cmsTag.setCreateBy(getUserName());
+//        }
         List<CmsTag> list = cmsTagService.selectCmsTagList(cmsTag);
         for (CmsTag cTag : list) {
             tag.add(cTag.getTagName()+" "+String.valueOf(cTag.getBlogNum()));
@@ -218,6 +228,8 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/essayChart")
     public Map essayChart() {
+        RequestContext requestContext = RequestContextHolder.take();
+
         SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
         Map essayChart = new HashMap();
@@ -254,10 +266,10 @@ public class ChartController extends BaseController {
         Date SunEnd = getFrontDayEnd(date, 0);
         datex.add(sd.format(SunBegin));
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
-            cmsBlog.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId()) && !roles.contains("admin") && !roles.contains("cms")) {
+//            cmsBlog.setCreateBy(getUserName());
+//        }
         cmsBlog.setType("2");
         List<CmsBlog> blogList = chartService.selectList(cmsBlog);
         essayData.add(chartService.selectListBetweenCreateTime(cmsBlog,sf.format(MonBegin),sf.format(MonEnd)).size());

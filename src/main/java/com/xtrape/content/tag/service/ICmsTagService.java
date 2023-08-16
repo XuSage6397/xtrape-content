@@ -17,7 +17,7 @@ public interface ICmsTagService
      * @param tagId 标签管理主键
      * @return 标签管理
      */
-    public CmsTag selectCmsTagByTagId(Long tagId);
+    public CmsTag selectCmsTagByTagId(String tagId);
 
     /**
      * 查询标签管理列表
@@ -49,7 +49,7 @@ public interface ICmsTagService
      * @param tagIds 需要删除的标签管理主键集合
      * @return 结果
      */
-    public int deleteCmsTagByTagIds(Long[] tagIds);
+    public int deleteCmsTagByTagIds(String[] tagIds);
 
     /**
      * 删除标签管理信息
@@ -57,5 +57,5 @@ public interface ICmsTagService
      * @param tagId 标签管理主键
      * @return 结果
      */
-    public int deleteCmsTagByTagId(Long tagId);
+    public int deleteCmsTagByTagId(String tagId);
 }

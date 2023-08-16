@@ -1,6 +1,8 @@
 package com.xtrape.content.type.domain;
 
 import com.xtrape.common.core.annotation.Excel;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.domain.BaseEntity;
@@ -11,12 +13,14 @@ import com.xtrape.common.core.domain.BaseEntity;
  * @author ning
  * @date 2022-01-02
  */
+@Data
+@Accessors(chain = true)
 public class CmsType extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** 分类ID */
-    private Long typeId;
+    private String typeId;
 
     /** 分类名称 */
     @Excel(name = "分类名称")
@@ -39,71 +43,5 @@ public class CmsType extends BaseEntity
     /** 博客数量 */
     private int blogNum;
 
-    public void setTypeId(Long typeId) 
-    {
-        this.typeId = typeId;
-    }
 
-    public Long getTypeId() 
-    {
-        return typeId;
-    }
-    public void setTypeName(String typeName) 
-    {
-        this.typeName = typeName;
-    }
-
-    public String getTypeName() 
-    {
-        return typeName;
-    }
-    public void setTypePic(String typePic) 
-    {
-        this.typePic = typePic;
-    }
-
-    public String getTypePic() 
-    {
-        return typePic;
-    }
-
-    public int getBlogNum() {
-        return blogNum;
-    }
-
-    public void setBlogNum(int blogNum) {
-        this.blogNum = blogNum;
-    }
-
-    public String getTypePicType() {
-        return typePicType;
-    }
-
-    public void setTypePicType(String typePicType) {
-        this.typePicType = typePicType;
-    }
-
-    public String getTypePicLink() {
-        return typePicLink;
-    }
-
-    public void setTypePicLink(String typePicLink) {
-        this.typePicLink = typePicLink;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("typeId", getTypeId())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("typeName", getTypeName())
-            .append("typePic", getTypePic())
-                .append("typePicType", getTypePicType())
-                .append("typePicLink", getTypePicLink())
-                .append("blogNum", getBlogNum())
-            .toString();
-    }
 }

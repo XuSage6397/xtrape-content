@@ -7,6 +7,8 @@ package com.xtrape.content.message.domain;
  */
 
 import com.xtrape.common.core.domain.BaseEntity;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -15,46 +17,17 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Description:〈留言点赞实体类〉
  * @Date: 2022/1/19 8:38
  **/
+@Data
+@Accessors(chain = true)
 public class CmsMessageLike  extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private Long messageId;
-    private Long userId;
+    private String messageId;
+    private String userId;
 
     /** 点赞数量 */
     private Long likeNum;
 
-    public Long getMessageId() {
-        return messageId;
-    }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getLikeNum() {
-        return likeNum;
-    }
-
-    public void setLikeNum(Long likeNum) {
-        this.likeNum = likeNum;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("messageId", getMessageId())
-                .append("userId", getUserId())
-                .append("likeNum", getLikeNum())
-                .toString();
-    }
 }

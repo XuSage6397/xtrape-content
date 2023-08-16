@@ -1,5 +1,7 @@
 package com.xtrape.content.comment.domain;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.annotation.Excel;
@@ -13,20 +15,22 @@ import java.util.List;
  * @author ning
  * @date 2022-01-21
  */
+@Data
+@Accessors(chain = true)
 public class CmsComment extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    private Long id;
+    private String id;
 
     /** 父评论id */
     @Excel(name = "父评论id")
-    private Long parentId;
+    private String parentId;
 
     /** 主评论id(第一级评论) */
     @Excel(name = "主评论id(第一级评论)")
-    private Long mainId;
+    private String mainId;
 
     /** 点赞数量 */
     @Excel(name = "点赞数量")
@@ -42,7 +46,7 @@ public class CmsComment extends BaseEntity
 
     /** 被评论者id，可以是人、项目、资源 */
     @Excel(name = "被评论者id，可以是人、项目、资源")
-    private Long blogId;
+    private String blogId;
 
     /** 文章标题 */
     private String blogTitle;
@@ -52,7 +56,7 @@ public class CmsComment extends BaseEntity
 
     /** 评论者id */
     @Excel(name = "评论者id")
-    private Long userId;
+    private String userId;
 
     /** 头像 */
     private String avatar;
@@ -64,151 +68,6 @@ public class CmsComment extends BaseEntity
     private String pCreateBy;
 
     /** 点赞 */
-    private boolean isLike;
+    private Boolean isLike;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setParentId(Long parentId) 
-    {
-        this.parentId = parentId;
-    }
-
-    public Long getParentId() 
-    {
-        return parentId;
-    }
-    public void setMainId(Long mainId) 
-    {
-        this.mainId = mainId;
-    }
-
-    public Long getMainId() 
-    {
-        return mainId;
-    }
-    public void setLikeNum(Long likeNum) 
-    {
-        this.likeNum = likeNum;
-    }
-
-    public Long getLikeNum() 
-    {
-        return likeNum;
-    }
-    public void setContent(String content) 
-    {
-        this.content = content;
-    }
-
-    public String getContent() 
-    {
-        return content;
-    }
-    public void setType(String type) 
-    {
-        this.type = type;
-    }
-
-    public String getType() 
-    {
-        return type;
-    }
-    public void setBlogId(Long blogId) 
-    {
-        this.blogId = blogId;
-    }
-
-    public Long getBlogId() 
-    {
-        return blogId;
-    }
-    public void setDelFlag(String delFlag) 
-    {
-        this.delFlag = delFlag;
-    }
-
-    public String getDelFlag() 
-    {
-        return delFlag;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public List<CmsComment> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<CmsComment> children) {
-        this.children = children;
-    }
-
-    public String getPCreateBy() {
-        return pCreateBy;
-    }
-
-    public void setPCreateBy(String pCreateBy) {
-        this.pCreateBy = pCreateBy;
-    }
-
-    public boolean getIsLike() {
-        return isLike;
-    }
-
-    public String getBlogTitle() {
-        return blogTitle;
-    }
-
-    public void setBlogTitle(String blogTitle) {
-        this.blogTitle = blogTitle;
-    }
-
-    public void setIsLike(boolean like) {
-        isLike = like;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("parentId", getParentId())
-            .append("mainId", getMainId())
-            .append("likeNum", getLikeNum())
-            .append("content", getContent())
-            .append("type", getType())
-            .append("blogId", getBlogId())
-            .append("blogTitle", getBlogTitle())
-            .append("delFlag", getDelFlag())
-            .append("userId", getUserId())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-                .append("avatar", getAvatar())
-                .append("children", getChildren())
-                .append("pCreateBy", getPCreateBy())
-                .append("isLike", getIsLike())
-            .toString();
-    }
 }

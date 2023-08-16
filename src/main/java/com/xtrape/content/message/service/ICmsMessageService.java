@@ -33,7 +33,7 @@ public interface ICmsMessageService
      * @param id 留言管理主键
      * @return 留言管理
      */
-    public CmsMessage selectCmsMessageById(Long id);
+    public CmsMessage selectCmsMessageById(String id);
 
     /**
      * 查询留言管理列表
@@ -65,7 +65,7 @@ public interface ICmsMessageService
      * @param ids 需要删除的留言管理主键集合
      * @return 结果
      */
-    public int deleteCmsMessageByIds(Long[] ids);
+    public int deleteCmsMessageByIds(String[] ids);
 
     /**
      * 删除留言管理信息
@@ -73,5 +73,5 @@ public interface ICmsMessageService
      * @param id 留言管理主键
      * @return 结果
      */
-    public int deleteCmsMessageById(Long id);
+    public int deleteCmsMessageById(String id);
 }

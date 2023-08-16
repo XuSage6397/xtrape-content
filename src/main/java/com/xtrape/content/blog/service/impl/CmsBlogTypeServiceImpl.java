@@ -31,17 +31,17 @@ public class CmsBlogTypeServiceImpl implements ICmsBlogTypeService {
     }
 
     @Override
-    public int deleteBlogTypeByBlogId(Long blogId) {
+    public int deleteBlogTypeByBlogId(String blogId) {
         return cmsBlogTypeMapper.deleteBlogTypeByBlogId(blogId);
     }
 
     @Override
-    public int deleteBlogType(Long[] ids) {
+    public int deleteBlogType(String[] ids) {
         return cmsBlogTypeMapper.deleteBlogType(ids);
     }
 
     @Override
-    public List<CmsBlogType> selectBlogTypeList(Long blogId) {
+    public List<CmsBlogType> selectBlogTypeList(String blogId) {
         return cmsBlogTypeMapper.selectBlogTypeList(blogId);
     }
 }

@@ -2,12 +2,14 @@ package com.xtrape.content.type.controller;
 
 import java.util.List;
 import java.util.Set;
+
+import com.xtrape.server.RequestContext;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.SecurityContext;
+import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.system.service.ISysPermissionService;
@@ -48,12 +50,14 @@ public class CmsTypeController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsType cmsType)
     {
+        RequestContext requestContext = RequestContextHolder.take();
+
         startPage();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsType.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+//            cmsType.setCreateBy(getUserName());
+//        }
         List<CmsType> list = cmsTypeService.selectCmsTypeList(cmsType);
         return getDataTable(list);
     }
@@ -76,7 +80,7 @@ public class CmsTypeController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('cms:type:query')")
     @GetMapping(value = "/{typeId}")
-    public AjaxResult getInfo(@PathVariable("typeId") Long typeId)
+    public AjaxResult getInfo(@PathVariable("typeId") String typeId)
     {
         return AjaxResult.success(cmsTypeService.selectCmsTypeByTypeId(typeId));
     }
@@ -89,7 +93,8 @@ public class CmsTypeController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsType cmsType)
     {
-        cmsType.setCreateBy(getUserName());
+        RequestContext requestContext = RequestContextHolder.take();
+        cmsType.setCreateBy(requestContext.getNickname());
         return toAjax(cmsTypeService.insertCmsType(cmsType));
     }
 
@@ -101,7 +106,8 @@ public class CmsTypeController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsType cmsType)
     {
-        cmsType.setUpdateBy(getUserName());
+        RequestContext requestContext = RequestContextHolder.take();
+        cmsType.setUpdateBy(requestContext.getNickname());
         return toAjax(cmsTypeService.updateCmsType(cmsType));
     }
 
@@ -111,7 +117,7 @@ public class CmsTypeController extends BaseController
     @PreAuthorize("@ss.hasPermi('cms:type:remove')")
     @Log(title = "分类管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{typeIds}")
-    public AjaxResult remove(@PathVariable Long[] typeIds)
+    public AjaxResult remove(@PathVariable String[] typeIds)
     {
         return toAjax(cmsTypeService.deleteCmsTypeByTypeIds(typeIds));
     }

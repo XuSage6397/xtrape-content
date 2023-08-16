@@ -19,7 +19,7 @@ public interface CmsTypeMapper extends BaseMapper<CmsType>
      * @param typeId 分类管理主键
      * @return 分类管理
      */
-    public CmsType selectCmsTypeByTypeId(Long typeId);
+    public CmsType selectCmsTypeByTypeId(String typeId);
 
     /**
      * 查询分类管理列表
@@ -59,7 +59,7 @@ public interface CmsTypeMapper extends BaseMapper<CmsType>
      * @param typeId 分类管理主键
      * @return 结果
      */
-    public int deleteCmsTypeByTypeId(Long typeId);
+    public int deleteCmsTypeByTypeId(String typeId);
 
     /**
      * 批量删除分类管理
@@ -67,5 +67,5 @@ public interface CmsTypeMapper extends BaseMapper<CmsType>
      * @param typeIds 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteCmsTypeByTypeIds(Long[] typeIds);
+    public int deleteCmsTypeByTypeIds(String[] typeIds);
 }

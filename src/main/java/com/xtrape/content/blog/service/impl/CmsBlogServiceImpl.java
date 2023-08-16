@@ -50,17 +50,17 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * @return 文章管理
      */
     @Override
-    public CmsBlog selectCmsBlogById(Long id)
+    public CmsBlog selectCmsBlogById(String id)
     {
         CmsBlog blog = cmsBlogMapper.selectCmsBlogById(id);
         //查询标签列表
         List<CmsBlogTag> blogTagList = cmsBlogTagMapper.selectBlogTagList(id);
-        Long[] tagIds = new Long[blogTagList.size()];
+        String[] tagIds = new String[blogTagList.size()];
         List<CmsTag> tags = new ArrayList<>();
         List<CmsType> types = new ArrayList<>();
         for (int i = 0; i<blogTagList.size();i++){
             CmsBlogTag cmsBlogTag = blogTagList.get(i);
-            Long tagId = cmsBlogTag.getTagId();
+            String tagId = cmsBlogTag.getTagId();
             tagIds[i] = tagId;
             CmsTag cmsTag = cmsTagMapper.selectCmsTagByTagId(tagId);
             tags.add(cmsTag);
@@ -69,10 +69,10 @@ public class CmsBlogServiceImpl implements ICmsBlogService
         blog.setTags(tags);
         //查询分类列表
         List<CmsBlogType> blogTypeList = cmsBlogTypeMapper.selectBlogTypeList(id);
-        Long[] typeIds = new Long[blogTypeList.size()];
+        String[] typeIds = new String[blogTypeList.size()];
         for (int i = 0; i<blogTypeList.size();i++){
             CmsBlogType cmsBlogType = blogTypeList.get(i);
-            Long typeId = cmsBlogType.getTypeId();
+            String typeId = cmsBlogType.getTypeId();
             typeIds[i] = typeId;
             CmsType cmsType = cmsTypeMapper.selectCmsTypeByTypeId(typeId);
             types.add(cmsType);
@@ -110,7 +110,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * 按分类查询文章列表
      */
     @Override
-    public List<CmsBlog> selectCmsBlogListByTypeId(Long id) {
+    public List<CmsBlog> selectCmsBlogListByTypeId(String id) {
         List<CmsBlog> cmsBlogList = cmsBlogMapper.selectCmsBlogListByTypeId(id);
         List<CmsBlog> blogList = BlogListAddTypeAndTag(cmsBlogList);
         return blogList;
@@ -120,7 +120,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * 按标签查询文章列表
      */
     @Override
-    public List<CmsBlog> selectCmsBlogListByTagId(Long id) {
+    public List<CmsBlog> selectCmsBlogListByTagId(String id) {
         List<CmsBlog> cmsBlogList = cmsBlogMapper.selectCmsBlogListByTagId(id);
         List<CmsBlog> blogList = BlogListAddTypeAndTag(cmsBlogList);
         return blogList;
@@ -133,16 +133,16 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * @return 结果
      */
     @Override
-    public Long insertCmsBlog(CmsBlog cmsBlog)
+    public String insertCmsBlog(CmsBlog cmsBlog)
     {
         cmsBlog.setCreateTime(DateUtils.getNowDate());
         cmsBlogMapper.insertCmsBlog(cmsBlog);
-        Long blogId = cmsBlog.getId();
+        String blogId = cmsBlog.getId();
         //新增文章标签
-        Long[] tagIds = cmsBlog.getTagIds();
+        String[] tagIds = cmsBlog.getTagIds();
         if (tagIds!=null&&tagIds.length>0){
             List<CmsBlogTag> blogTagList = new ArrayList<>();
-            for (Long tagId : tagIds) {
+            for (String tagId : tagIds) {
                 CmsBlogTag cmsBlogTag = new CmsBlogTag();
                 cmsBlogTag.setBlogId(blogId);
                 cmsBlogTag.setTagId(tagId);
@@ -151,10 +151,10 @@ public class CmsBlogServiceImpl implements ICmsBlogService
             cmsBlogTagMapper.batchBlogTag(blogTagList);
         }
         //新增文章分类
-        Long[] typeIds = cmsBlog.getTypeIds();
+        String[] typeIds = cmsBlog.getTypeIds();
         if (typeIds!=null&&typeIds.length>0){
             List<CmsBlogType> blogTypeList = new ArrayList<>();
-            for (Long typeId : typeIds) {
+            for (String typeId : typeIds) {
                 CmsBlogType cmsBlogType = new CmsBlogType();
                 cmsBlogType.setBlogId(blogId);
                 cmsBlogType.setTypeId(typeId);
@@ -175,16 +175,16 @@ public class CmsBlogServiceImpl implements ICmsBlogService
     public int updateCmsBlog(CmsBlog cmsBlog)
     {
         cmsBlog.setUpdateTime(DateUtils.getNowDate());
-        Long blogId = cmsBlog.getId();
+        String blogId = cmsBlog.getId();
         //清空文章分类关联
         cmsBlogTypeMapper.deleteBlogTypeByBlogId(blogId);
         //清空文章标签关联
         cmsBlogTagMapper.deleteBlogTagByBlogId(blogId);
         //新增文章标签
-        Long[] tagIds = cmsBlog.getTagIds();
+        String[] tagIds = cmsBlog.getTagIds();
         if (tagIds!=null&&tagIds.length>0){
             List<CmsBlogTag> blogTagList = new ArrayList<>();
-            for (Long tagId : tagIds) {
+            for (String tagId : tagIds) {
                 CmsBlogTag cmsBlogTag = new CmsBlogTag();
                 cmsBlogTag.setBlogId(blogId);
                 cmsBlogTag.setTagId(tagId);
@@ -193,10 +193,10 @@ public class CmsBlogServiceImpl implements ICmsBlogService
             cmsBlogTagMapper.batchBlogTag(blogTagList);
         }
         //新增文章分类
-        Long[] typeIds = cmsBlog.getTypeIds();
+        String[] typeIds = cmsBlog.getTypeIds();
         if (typeIds!=null&&typeIds.length>0){
             List<CmsBlogType> blogTypeList = new ArrayList<>();
-            for (Long typeId : typeIds) {
+            for (String typeId : typeIds) {
                 CmsBlogType cmsBlogType = new CmsBlogType();
                 cmsBlogType.setBlogId(blogId);
                 cmsBlogType.setTypeId(typeId);
@@ -214,9 +214,9 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * @return 结果
      */
     @Override
-    public int deleteCmsBlogByIds(Long[] ids)
+    public int deleteCmsBlogByIds(String[] ids)
     {
-        for (Long id : ids) {
+        for (String id : ids) {
             //清空文章分类关联
             cmsBlogTypeMapper.deleteBlogTypeByBlogId(id);
             //清空文章标签关联
@@ -232,7 +232,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
      * @return 结果
      */
     @Override
-    public int deleteCmsBlogById(Long id)
+    public int deleteCmsBlogById(String id)
     {
         //清空文章分类关联
         cmsBlogTypeMapper.deleteBlogTypeByBlogId(id);
@@ -253,12 +253,12 @@ public class CmsBlogServiceImpl implements ICmsBlogService
             return cmsBlogList;
         }
         for (CmsBlog blog : cmsBlogList) {
-            Long blogId = blog.getId();
+            String blogId = blog.getId();
             //查询标签列表
             List<CmsBlogTag> blogTagList = cmsBlogTagMapper.selectBlogTagList(blogId);
             List<CmsTag> cmsTagList = new ArrayList<>();
             blogTagList.forEach((CmsBlogTag cmsBlogTag)->{
-                Long tagId = cmsBlogTag.getTagId();
+                String tagId = cmsBlogTag.getTagId();
                 CmsTag cmsTag = cmsTagMapper.selectCmsTagByTagId(tagId);
                 cmsTagList.add(cmsTag);
             });
@@ -267,7 +267,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
             List<CmsBlogType> blogTypeList = cmsBlogTypeMapper.selectBlogTypeList(blogId);
             List<CmsType> cmsTypeList = new ArrayList<>();
             blogTypeList.forEach((CmsBlogType cmsBlogType)->{
-                Long typeId = cmsBlogType.getTypeId();
+                String typeId = cmsBlogType.getTypeId();
                 CmsType cmsType = cmsTypeMapper.selectCmsTypeByTypeId(typeId);
                 cmsTypeList.add(cmsType);
             });

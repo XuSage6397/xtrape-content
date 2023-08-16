@@ -3,6 +3,8 @@ package com.xtrape.content.blog.domain;
 import com.xtrape.common.core.annotation.Excel;
 import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.type.domain.CmsType;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.domain.BaseEntity;
@@ -15,13 +17,15 @@ import java.util.List;
  * @author ning
  * @date 2022-01-01
  */
+@Data
+@Accessors(chain = true)
 public class CmsBlog extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
      * ID
      */
-    private Long id;
+    private String id;
 
     /**
      * 标题
@@ -95,12 +99,12 @@ public class CmsBlog extends BaseEntity {
     /**
      * 分类
      */
-    private Long[] typeIds;
+    private String[] typeIds;
 
     /**
      * 分类
      */
-    private Long[] tagIds;
+    private String[] tagIds;
 
     /** 角色对象 */
     private List<CmsTag> tags;
@@ -108,175 +112,4 @@ public class CmsBlog extends BaseEntity {
     /** 角色对象 */
     private List<CmsType> types;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setTop(String top) {
-        this.top = top;
-    }
-
-    public String getTop() {
-        return top;
-    }
-
-    public void setViews(Long views) {
-        this.views = views;
-    }
-
-    public Long getViews() {
-        return views;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public Long[] getTypeIds() {
-        return typeIds;
-    }
-
-    public void setTypeIds(Long[] typeIds) {
-        this.typeIds = typeIds;
-    }
-
-    public Long[] getTagIds() {
-        return tagIds;
-    }
-
-    public void setTagIds(Long[] tagIds) {
-        this.tagIds = tagIds;
-    }
-
-    public List<CmsTag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<CmsTag> tags) {
-        this.tags = tags;
-    }
-
-    public List<CmsType> getTypes() {
-        return types;
-    }
-
-    public void setTypes(List<CmsType> types) {
-        this.types = types;
-    }
-
-    public String getBlogPic() {
-        return blogPic;
-    }
-
-    public void setBlogPic(String blogPic) {
-        this.blogPic = blogPic;
-    }
-
-    public String getBlogDesc() {
-        return blogDesc;
-    }
-
-    public void setBlogDesc(String blogDesc) {
-        this.blogDesc = blogDesc;
-    }
-
-    public String getBlogFiles() {
-        return blogFiles;
-    }
-
-    public void setBlogFiles(String blogFiles) {
-        this.blogFiles = blogFiles;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getContentMarkdown() {
-        return contentMarkdown;
-    }
-
-    public void setContentMarkdown(String contentMarkdown) {
-        this.contentMarkdown = contentMarkdown;
-    }
-
-    public String getBlogPicType() {
-        return blogPicType;
-    }
-
-    public void setBlogPicType(String blogPicType) {
-        this.blogPicType = blogPicType;
-    }
-
-    public String getBlogPicLink() {
-        return blogPicLink;
-    }
-
-    public void setBlogPicLink(String blogPicLink) {
-        this.blogPicLink = blogPicLink;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("id", getId())
-                .append("createBy", getCreateBy())
-                .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
-                .append("updateTime", getUpdateTime())
-                .append("title", getTitle())
-                .append("type", getType())
-                .append("content", getContent())
-                .append("contentType", getContentType())
-                .append("contentMarkdown", getContentMarkdown())
-                .append("top", getTop())
-                .append("views", getViews())
-                .append("status", getStatus())
-                .append("typeIds", getTypeIds())
-                .append("tagIds", getTagIds())
-                .append("tags", getTags())
-                .append("types", getTypes())
-                .append("blogPicType", getBlogPicType())
-                .append("blogPic", getBlogPic())
-                .append("blogPicLink", getBlogPicLink())
-                .append("blogDesc", getBlogDesc())
-                .append("blogFiles", getBlogFiles())
-                .toString();
-    }
 }

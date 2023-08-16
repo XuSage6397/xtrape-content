@@ -19,21 +19,21 @@ public interface CmsBlogTypeMapper extends BaseMapper<CmsBlogType> {
     /**
      * 通过blogID删除blog文件关联
      */
-    public int deleteBlogTypeByBlogId(Long blogId);
+    public int deleteBlogTypeByBlogId(String blogId);
     /**
      * 批量删除blog文件关联
      */
-    public int deleteBlogType(Long[] ids);
+    public int deleteBlogType(String[] ids);
     /**
      * 查询博客列表
      */
-    public List<CmsBlogType> selectBlogTypeList(Long blogId);
+    public List<CmsBlogType> selectBlogTypeList(String blogId);
     /**
      * 通过typeId删除blog文件关联
      */
-    public int deleteBlogTypeByTypeId(Long typeId);
+    public int deleteBlogTypeByTypeId(String typeId);
     /**
      * 通过typeId统计blog数量
      */
-    public int countBlogByTypeId(Long typeId);
+    public int countBlogByTypeId(String typeId);
 }

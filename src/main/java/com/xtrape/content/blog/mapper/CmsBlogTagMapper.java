@@ -20,21 +20,21 @@ public interface CmsBlogTagMapper extends BaseMapper<CmsBlogTag> {
     /**
      * 通过blogID删除blog文件关联
      */
-    public int deleteBlogTagByBlogId(Long blogId);
+    public int deleteBlogTagByBlogId(String blogId);
     /**
      * 批量删除blog文件关联
      */
-    public int deleteBlogTag(Long[] ids);
+    public int deleteBlogTag(String[] ids);
     /**
      * 查询文件列表
      */
-    public List<CmsBlogTag> selectBlogTagList(Long blogId);
+    public List<CmsBlogTag> selectBlogTagList(String blogId);
     /**
      * 通过tagId删除blog文件关联
      */
-    public int deleteBlogTagByTagId(Long tagId);
+    public int deleteBlogTagByTagId(String tagId);
     /**
      * 通过tagId统计blog数量
      */
-    public int countBlogByTagId(Long tagId);
+    public int countBlogByTagId(String tagId);
 }

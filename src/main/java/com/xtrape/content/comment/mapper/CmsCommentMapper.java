@@ -20,7 +20,7 @@ public interface CmsCommentMapper extends BaseMapper<CmsComment>
      * @param id 评论管理主键
      * @return 评论管理
      */
-    public CmsComment selectCmsCommentById(Long id);
+    public CmsComment selectCmsCommentById(String id);
 
     /**
      * 查询评论管理列表
@@ -59,7 +59,7 @@ public interface CmsCommentMapper extends BaseMapper<CmsComment>
      * @param id 评论管理主键
      * @return 结果
      */
-    public int deleteCmsCommentById(Long id);
+    public int deleteCmsCommentById(String id);
 
     /**
      * 批量删除评论管理

@@ -2,12 +2,14 @@ package com.xtrape.content.comment.controller;
 
 import java.util.List;
 import java.util.Set;
+
+import com.xtrape.server.RequestContext;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.SecurityContext;
+import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.comment.domain.CmsCommentLike;
@@ -60,7 +62,7 @@ public class CmsCommentController extends BaseController
     @PostMapping("/cms/addComment")
     public AjaxResult addComment(@RequestBody CmsComment cmsComment)
     {
-        Long parentId = cmsComment.getParentId();
+        String parentId = cmsComment.getParentId();
         if (parentId!=null){
             CmsComment comment = cmsCommentService.selectCmsCommentById(parentId);
             if (comment.getMainId()!=null){
@@ -98,11 +100,12 @@ public class CmsCommentController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsComment cmsComment)
     {
+        RequestContext requestContext = RequestContextHolder.take();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsComment.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+//            cmsComment.setCreateBy(getUserName());
+//        }
         cmsComment.setDelFlag("0");
         startPage();
         List<CmsComment> list = cmsCommentService.selectCmsCommentList(cmsComment);
@@ -127,7 +130,7 @@ public class CmsCommentController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(cmsCommentService.selectCmsCommentById(id));
     }

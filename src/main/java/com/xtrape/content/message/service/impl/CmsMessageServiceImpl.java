@@ -38,7 +38,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
     @Override
     public List<CmsMessage> selectMessageList(CmsMessage cmsMessage) {
         //判断是否登录
-        Long logUserUserId = null;
+        String logUserUserId = null;
         String createBy = cmsMessage.getCreateBy();
         if (createBy!=null&&!"".equals(createBy)){
             SysUser logUser = sysUserMapper.selectUserByUserName(createBy);
@@ -50,7 +50,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
         List<CmsMessage> cmsMessageList = cmsMessageMapper.selectCmsMessageList(cmsMessage);
         for (CmsMessage message : cmsMessageList) {
             //添加头像
-            Long userId = message.getUserId();
+            String userId = message.getUserId();
             if (userId!=null){
                 SysUser user = sysUserMapper.selectUserById(userId);
                 message.setAvatar(user.getAvatar());
@@ -75,7 +75,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
             if (childMessageList.size()>0){
                 for (CmsMessage childListMessage : childMessageList) {
                     //添加头像
-                    Long childUserId = childListMessage.getUserId();
+                    String childUserId = childListMessage.getUserId();
                     if (childUserId!=null){
                         SysUser user = sysUserMapper.selectUserById(childUserId);
                         childListMessage.setAvatar(user.getAvatar());
@@ -147,7 +147,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
      * @return 留言管理
      */
     @Override
-    public CmsMessage selectCmsMessageById(Long id)
+    public CmsMessage selectCmsMessageById(String id)
     {
         return cmsMessageMapper.selectCmsMessageById(id);
     }
@@ -185,13 +185,13 @@ public class CmsMessageServiceImpl implements ICmsMessageService
         }
         for (CmsMessage message : cmsMessageList) {
             //添加头像
-            Long userId = message.getUserId();
+            String userId = message.getUserId();
             if (userId!=null){
                 SysUser user = sysUserMapper.selectUserById(userId);
                 message.setAvatar(user.getAvatar());
             }
             //添加父留言信息
-            Long parentId = message.getParentId();
+            String parentId = message.getParentId();
             if (parentId!=null){
                 CmsMessage parentMessage = cmsMessageMapper.selectCmsMessageById(parentId);
                 message.setPCreateBy(parentMessage.getCreateBy());
@@ -255,7 +255,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
      * @return 结果
      */
     @Override
-    public int deleteCmsMessageByIds(Long[] ids)
+    public int deleteCmsMessageByIds(String[] ids)
     {
         return cmsMessageMapper.updateDelFlagByIds(ids);
     }
@@ -267,7 +267,7 @@ public class CmsMessageServiceImpl implements ICmsMessageService
      * @return 结果
      */
     @Override
-    public int deleteCmsMessageById(Long id)
+    public int deleteCmsMessageById(String id)
     {
         return cmsMessageMapper.updateDelFlagById(id);
     }

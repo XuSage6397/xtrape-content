@@ -1,6 +1,8 @@
 package com.xtrape.content.message.domain;
 
 import com.xtrape.common.core.annotation.Excel;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.domain.BaseEntity;
@@ -13,20 +15,22 @@ import java.util.List;
  * @author ning
  * @date 2022-01-15
  */
+@Data
+@Accessors(chain = true)
 public class CmsMessage extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** ID */
-    private Long id;
+    private String id;
 
     /** 父留言id */
     @Excel(name = "父留言id")
-    private Long parentId;
+    private String parentId;
 
     /** 主留言id(第一级留言) */
     @Excel(name = "主留言id(第一级留言)")
-    private Long mainId;
+    private String mainId;
 
     /** 点赞数量 */
     @Excel(name = "点赞数量")
@@ -42,11 +46,11 @@ public class CmsMessage extends BaseEntity
 
     /** 被留言者id，可以是人、项目、资源 */
     @Excel(name = "被留言者id，可以是人、项目、资源")
-    private Long blogId;
+    private String blogId;
 
     /** 留言者id */
     @Excel(name = "留言者id")
-    private Long userId;
+    private String userId;
 
     /** 删除标志（0代表存在 1代表删除） */
     @Excel(name = "删除标志（0代表存在 1代表删除）")
@@ -62,140 +66,6 @@ public class CmsMessage extends BaseEntity
     private String pCreateBy;
 
     /** 点赞 */
-    private boolean isLike;
+    private Boolean isLike;
 
-    public void setId(Long id) 
-    {
-        this.id = id;
-    }
-
-    public Long getId() 
-    {
-        return id;
-    }
-    public void setParentId(Long parentId) 
-    {
-        this.parentId = parentId;
-    }
-
-    public Long getParentId() 
-    {
-        return parentId;
-    }
-    public void setLikeNum(Long likeNum) 
-    {
-        this.likeNum = likeNum;
-    }
-
-    public Long getMainId() {
-        return mainId;
-    }
-
-    public void setMainId(Long mainId) {
-        this.mainId = mainId;
-    }
-
-    public Long getLikeNum()
-    {
-        return likeNum;
-    }
-    public void setContent(String content) 
-    {
-        this.content = content;
-    }
-
-    public String getContent() 
-    {
-        return content;
-    }
-    public void setType(String type) 
-    {
-        this.type = type;
-    }
-
-    public String getType() 
-    {
-        return type;
-    }
-    public void setBlogId(Long blogId) 
-    {
-        this.blogId = blogId;
-    }
-
-    public Long getBlogId() 
-    {
-        return blogId;
-    }
-    public void setUserId(Long userId) 
-    {
-        this.userId = userId;
-    }
-
-    public Long getUserId() 
-    {
-        return userId;
-    }
-
-    public String getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(String delFlag) {
-        this.delFlag = delFlag;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public void setAvatar(String avatar) {
-        this.avatar = avatar;
-    }
-
-    public List<CmsMessage> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<CmsMessage> children) {
-        this.children = children;
-    }
-
-    public String getPCreateBy() {
-        return pCreateBy;
-    }
-
-    public void setPCreateBy(String pCreateBy) {
-        this.pCreateBy = pCreateBy;
-    }
-
-    public boolean getIsLike() {
-        return isLike;
-    }
-
-    public void setIsLike(boolean isLike) {
-        this.isLike = isLike;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("parentId", getParentId())
-            .append("mainId", getMainId())
-            .append("likeNum", getLikeNum())
-            .append("content", getContent())
-            .append("type", getType())
-            .append("blogId", getBlogId())
-            .append("userId", getUserId())
-            .append("delFlag", getDelFlag())
-            .append("avatar",getAvatar())
-            .append("children",getChildren())
-            .append("pCreateBy",getPCreateBy())
-            .append("createBy", getCreateBy())
-            .append("createTime", getCreateTime())
-            .append("updateBy", getUpdateBy())
-            .append("updateTime", getUpdateTime())
-            .append("isLike", getIsLike())
-            .toString();
-    }
 }

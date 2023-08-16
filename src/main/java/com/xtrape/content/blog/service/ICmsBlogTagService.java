@@ -18,13 +18,13 @@ public interface ICmsBlogTagService {
     /**
      * 通过blogID删除blog标签关联
      */
-    public int deleteBlogTagByBlogId(Long blogId);
+    public int deleteBlogTagByBlogId(String blogId);
     /**
      * 批量删除blog标签关联
      */
-    public int deleteBlogTag(Long[] ids);
+    public int deleteBlogTag(String[] ids);
     /**
      * 查询标签列表
      */
-    public List<CmsBlogTag> selectBlogTagList(Long blogId);
+    public List<CmsBlogTag> selectBlogTagList(String blogId);
 }

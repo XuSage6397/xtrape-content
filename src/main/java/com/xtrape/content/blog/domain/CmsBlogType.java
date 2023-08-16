@@ -6,6 +6,8 @@ package com.xtrape.content.blog.domain;
  * @Date: 2022/1/2 23:34
  */
 
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -14,40 +16,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Description:〈blog分类关联表 cms_blog_type〉
  * @Date: 2022/1/2 23:34
  **/
+@Data
+@Accessors(chain = true)
 public class CmsBlogType {
-    private Long typeId;
-    private Long blogId;
-    private Long[] typeIds;
+    private String typeId;
+    private String blogId;
+    private String[] typeIds;
 
-    public Long getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(Long typeId) {
-        this.typeId = typeId;
-    }
-
-    public Long getBlogId() {
-        return blogId;
-    }
-
-    public void setBlogId(Long blogId) {
-        this.blogId = blogId;
-    }
-
-    public Long[] getTypeIds() {
-        return typeIds;
-    }
-
-    public void setTypeIds(Long[] typeIds) {
-        this.typeIds = typeIds;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-                .append("typeId", getTypeId())
-                .append("blogId", getBlogId())
-                .toString();
-    }
 }

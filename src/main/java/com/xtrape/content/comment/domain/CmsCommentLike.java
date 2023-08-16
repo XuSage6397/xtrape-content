@@ -7,6 +7,8 @@ package com.xtrape.content.comment.domain;
  */
 
 import com.xtrape.common.security.web.domain.BaseEntity;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
@@ -15,28 +17,30 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Description:〈評論點贊实体类〉
  * @Date: 2022/1/22 17:48
  **/
+@Data
+@Accessors(chain = true)
 public class CmsCommentLike  extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    private Long commentId;
-    private Long userId;
+    private String commentId;
+    private String userId;
 
     /** 点赞数量 */
     private Long likeNum;
 
-    public Long getCommentId() {
+    public String getCommentId() {
         return commentId;
     }
 
-    public void setCommentId(Long commentId) {
+    public void setCommentId(String commentId) {
         this.commentId = commentId;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 

@@ -18,13 +18,13 @@ public interface ICmsBlogTypeService {
     /**
      * 通过blogID删除blog分类关联
      */
-    public int deleteBlogTypeByBlogId(Long blogId);
+    public int deleteBlogTypeByBlogId(String blogId);
     /**
      * 批量删除blog分类关联
      */
-    public int deleteBlogType(Long[] ids);
+    public int deleteBlogType(String[] ids);
     /**
      * 查询分类列表
      */
-    public List<CmsBlogType> selectBlogTypeList(Long blogId);
+    public List<CmsBlogType> selectBlogTypeList(String blogId);
 }

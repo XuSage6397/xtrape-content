@@ -2,12 +2,14 @@ package com.xtrape.content.tag.controller;
 
 import java.util.List;
 import java.util.Set;
+
+import com.xtrape.server.RequestContext;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.SecurityContext;
+import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.tag.service.ICmsTagService;
@@ -48,12 +50,14 @@ public class CmsTagController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsTag cmsTag)
     {
+        RequestContext requestContext = RequestContextHolder.take();
+
         startPage();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsTag.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+//            cmsTag.setCreateBy(getUserName());
+//        }
         List<CmsTag> list = cmsTagService.selectCmsTagList(cmsTag);
         return getDataTable(list);
     }
@@ -76,7 +80,7 @@ public class CmsTagController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('cms:tag:query')")
     @GetMapping(value = "/{tagId}")
-    public AjaxResult getInfo(@PathVariable("tagId") Long tagId)
+    public AjaxResult getInfo(@PathVariable("tagId") String tagId)
     {
         return AjaxResult.success(cmsTagService.selectCmsTagByTagId(tagId));
     }
@@ -89,7 +93,9 @@ public class CmsTagController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsTag cmsTag)
     {
-        cmsTag.setCreateBy(getUserName());
+        RequestContext requestContext = RequestContextHolder.take();
+
+        cmsTag.setCreateBy(requestContext.getNickname());
         return toAjax(cmsTagService.insertCmsTag(cmsTag));
     }
 
@@ -101,7 +107,9 @@ public class CmsTagController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsTag cmsTag)
     {
-        cmsTag.setUpdateBy(getUserName());
+        RequestContext requestContext = RequestContextHolder.take();
+
+        cmsTag.setUpdateBy(requestContext.getNickname());
         return toAjax(cmsTagService.updateCmsTag(cmsTag));
     }
 
@@ -111,7 +119,7 @@ public class CmsTagController extends BaseController
     @PreAuthorize("@ss.hasPermi('cms:tag:remove')")
     @Log(title = "标签管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{tagIds}")
-    public AjaxResult remove(@PathVariable Long[] tagIds)
+    public AjaxResult remove(@PathVariable String[] tagIds)
     {
         return toAjax(cmsTagService.deleteCmsTagByTagIds(tagIds));
     }

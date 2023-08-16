@@ -33,7 +33,7 @@ public interface ICmsCommentService
      * @param id 评论管理主键
      * @return 评论管理
      */
-    public CmsComment selectCmsCommentById(Long id);
+    public CmsComment selectCmsCommentById(String id);
 
     /**
      * 查询评论管理列表

@@ -43,7 +43,7 @@ public class CmsCommentServiceImpl implements ICmsCommentService
     @Override
     public List<CmsComment> selectCommentList(CmsComment cmsComment) {
         //判断是否登录
-        Long logUserUserId = null;
+        String logUserUserId = null;
         String createBy = cmsComment.getCreateBy();
         if (createBy!=null&&!"".equals(createBy)){
             SysUser logUser = sysUserMapper.selectUserByUserName(createBy);
@@ -55,7 +55,7 @@ public class CmsCommentServiceImpl implements ICmsCommentService
         List<CmsComment> cmsCommentList = cmsCommentMapper.selectCmsCommentList(cmsComment);
         for (CmsComment comment : cmsCommentList) {
             //添加头像
-            Long userId = comment.getUserId();
+            String userId = comment.getUserId();
             if (userId!=null){
                 SysUser user = sysUserMapper.selectUserById(userId);
                 comment.setAvatar(user.getAvatar());
@@ -80,7 +80,7 @@ public class CmsCommentServiceImpl implements ICmsCommentService
             if (childCommentList.size()>0){
                 for (CmsComment childListComment : childCommentList) {
                     //添加头像
-                    Long childUserId = childListComment.getUserId();
+                    String childUserId = childListComment.getUserId();
                     if (childUserId!=null){
                         SysUser user = sysUserMapper.selectUserById(childUserId);
                         childListComment.setAvatar(user.getAvatar());
@@ -152,7 +152,7 @@ public class CmsCommentServiceImpl implements ICmsCommentService
      * @return 评论管理
      */
     @Override
-    public CmsComment selectCmsCommentById(Long id)
+    public CmsComment selectCmsCommentById(String id)
     {
         return cmsCommentMapper.selectCmsCommentById(id);
     }
@@ -190,19 +190,19 @@ public class CmsCommentServiceImpl implements ICmsCommentService
         }
         for (CmsComment comment : cmsCommentList) {
             //添加头像
-            Long userId = comment.getUserId();
+            String userId = comment.getUserId();
             if (userId!=null){
                 SysUser user = sysUserMapper.selectUserById(userId);
                 comment.setAvatar(user.getAvatar());
             }
             //添加父评论信息
-            Long parentId = comment.getParentId();
+            String parentId = comment.getParentId();
             if (parentId!=null){
                 CmsComment parentComment = cmsCommentMapper.selectCmsCommentById(parentId);
                 comment.setPCreateBy(parentComment.getCreateBy());
             }
             //添加博客信息
-            Long blogId = comment.getBlogId();
+            String blogId = comment.getBlogId();
             if (blogId!=null){
                 CmsBlog blog = cmsBlogMapper.selectCmsBlogById(blogId);
                 comment.setBlogTitle(blog.getTitle());

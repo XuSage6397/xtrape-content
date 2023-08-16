@@ -33,7 +33,7 @@ public class CmsTagServiceImpl implements ICmsTagService
      * @return 标签管理
      */
     @Override
-    public CmsTag selectCmsTagByTagId(Long tagId)
+    public CmsTag selectCmsTagByTagId(String tagId)
     {
         return cmsTagMapper.selectCmsTagByTagId(tagId);
     }
@@ -100,9 +100,9 @@ public class CmsTagServiceImpl implements ICmsTagService
      * @return 结果
      */
     @Override
-    public int deleteCmsTagByTagIds(Long[] tagIds)
+    public int deleteCmsTagByTagIds(String[] tagIds)
     {
-        for (Long tagId : tagIds) {
+        for (String tagId : tagIds) {
             //删除标签文章关联表信息
             cmsBlogTagMapper.deleteBlogTagByTagId(tagId);
         }
@@ -116,7 +116,7 @@ public class CmsTagServiceImpl implements ICmsTagService
      * @return 结果
      */
     @Override
-    public int deleteCmsTagByTagId(Long tagId)
+    public int deleteCmsTagByTagId(String tagId)
     {
         //删除标签文章关联表信息
         cmsBlogTagMapper.deleteBlogTagByTagId(tagId);

@@ -2,6 +2,8 @@ package com.xtrape.content.blog.controller;
 
 import java.util.List;
 
+import com.xtrape.server.RequestContext;
+import com.xtrape.server.RequestContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
@@ -79,7 +81,7 @@ public class CmsBlogController extends BaseController
      * 首页获取文章详细信息
      */
     @GetMapping(value = { "/detail/", "/detail/{id}" })
-    public AjaxResult getInfoDetail(@PathVariable(value = "id", required = false) Long id)
+    public AjaxResult getInfoDetail(@PathVariable(value = "id", required = false) String id)
     {
         AjaxResult ajax = AjaxResult.success();
         CmsType cmsType = new CmsType();
@@ -97,7 +99,7 @@ public class CmsBlogController extends BaseController
      * 首页按分类查询文章列表
      */
     @GetMapping("/cmsListByType/{id}")
-    public TableDataInfo cmsListByTypeId(@PathVariable(value = "id", required = false) Long id)
+    public TableDataInfo cmsListByTypeId(@PathVariable(value = "id", required = false) String id)
     {
         startPage();
         List<CmsBlog> list = cmsBlogService.selectCmsBlogListByTypeId(id);
@@ -108,7 +110,7 @@ public class CmsBlogController extends BaseController
      * 首页按标签查询文章列表
      */
     @GetMapping("/cmsListByTag/{id}")
-    public TableDataInfo cmsListByTagId(@PathVariable(value = "id", required = false) Long id)
+    public TableDataInfo cmsListByTagId(@PathVariable(value = "id", required = false) String id)
     {
         startPage();
         List<CmsBlog> list = cmsBlogService.selectCmsBlogListByTagId(id);
@@ -132,7 +134,7 @@ public class CmsBlogController extends BaseController
      * 首页增加阅读量
      */
     @GetMapping("/addBlogViews/{id}")
-    public AjaxResult addBlogViews(@PathVariable(value = "id", required = false) Long id)
+    public AjaxResult addBlogViews(@PathVariable(value = "id", required = false) String id)
     {
         CmsBlog cmsBlog = cmsBlogService.selectCmsBlogById(id);
         Long views = cmsBlog.getViews();
@@ -162,14 +164,16 @@ public class CmsBlogController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsBlog cmsBlog)
     {
+        RequestContext requestContext = RequestContextHolder.take();
+
         startPage();
         AjaxResult roleResult = systemFeignService.listMnemonicByMemberPortal();
         log.info("systemFeignService: {}", roleResult);
         // 角色集合
         List<String> roles = (List<String>)roleResult.get("data");
         if (!roles.isEmpty()) {
-            // TODO: 验证当前模块的权限和当前用户权限是否匹配。 注意： 模块权限在 System 中限制， 这里不需要验证。
-            cmsBlog.setCreateBy(getUserName());
+            // todo: 验证当前模块的权限和当前用户权限是否匹配。 注意： 模块权限在 System 中限制， 这里不需要验证。
+            cmsBlog.setCreateBy(requestContext.getNickname());
         }
         List<CmsBlog> list = cmsBlogService.selectCmsBlogList(cmsBlog);
         return getDataTable(list);
@@ -193,7 +197,7 @@ public class CmsBlogController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('cms:blog:query')")
     @GetMapping(value = { "/", "/{id}" })
-    public AjaxResult getInfo(@PathVariable(value = "id", required = false) Long id)
+    public AjaxResult getInfo(@PathVariable(value = "id", required = false) String id)
     {
         AjaxResult ajax = AjaxResult.success();
         CmsType cmsType = new CmsType();
@@ -215,8 +219,10 @@ public class CmsBlogController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsBlog cmsBlog)
     {
-        cmsBlog.setCreateBy(getUserName());
-        Long blogId = cmsBlogService.insertCmsBlog(cmsBlog);
+        RequestContext requestContext = RequestContextHolder.take();
+
+        cmsBlog.setCreateBy(requestContext.getNickname());
+        String blogId = cmsBlogService.insertCmsBlog(cmsBlog);
         if (blogId==null){
             return AjaxResult.error();
         }
@@ -231,7 +237,9 @@ public class CmsBlogController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsBlog cmsBlog)
     {
-        cmsBlog.setUpdateBy(getUserName());
+        RequestContext requestContext = RequestContextHolder.take();
+
+        cmsBlog.setUpdateBy(requestContext.getNickname());
         //删除原首图
         CmsBlog oldBlog = cmsBlogService.selectCmsBlogById(cmsBlog.getId());
         if (cmsBlog.getBlogPic().isEmpty()||!cmsBlog.getBlogPic().equals(oldBlog.getBlogPic())){
@@ -253,10 +261,10 @@ public class CmsBlogController extends BaseController
     @PreAuthorize("@ss.hasPermi('cms:blog:remove')")
     @Log(title = "文章管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+    public AjaxResult remove(@PathVariable String[] ids)
     {
         //删除原首图
-        for (Long id : ids) {
+        for (String id : ids) {
             CmsBlog oldBlog = cmsBlogService.selectCmsBlogById(id);
             if(!oldBlog.getBlogPic().isEmpty()){
                 String blogPic = oldBlog.getBlogPic();
@@ -279,7 +287,7 @@ public class CmsBlogController extends BaseController
     {
         String blogPic = cmsBlog.getBlogPic();
         if (blogPic!=null&&!"".equals(blogPic)){
-            Long blogId = cmsBlog.getId();
+            String blogId = cmsBlog.getId();
             if (blogId==null){
                 int newFileNameSeparatorIndex = blogPic.lastIndexOf("/");
                 String FileName = blogPic.substring(newFileNameSeparatorIndex + 1).toLowerCase();

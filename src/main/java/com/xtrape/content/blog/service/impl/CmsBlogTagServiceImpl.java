@@ -31,17 +31,17 @@ public class CmsBlogTagServiceImpl implements ICmsBlogTagService {
     }
 
     @Override
-    public int deleteBlogTagByBlogId(Long blogId) {
+    public int deleteBlogTagByBlogId(String blogId) {
         return cmsBlogTagMapper.deleteBlogTagByBlogId(blogId);
     }
 
     @Override
-    public int deleteBlogTag(Long[] ids) {
+    public int deleteBlogTag(String[] ids) {
         return cmsBlogTagMapper.deleteBlogTag(ids);
     }
 
     @Override
-    public List<CmsBlogTag> selectBlogTagList(Long blogId) {
+    public List<CmsBlogTag> selectBlogTagList(String blogId) {
         return cmsBlogTagMapper.selectBlogTagList(blogId);
     }
 }

@@ -20,7 +20,7 @@ public interface CmsMessageMapper extends BaseMapper<CmsMessage>
      * @param id 留言管理主键
      * @return 留言管理
      */
-    public CmsMessage selectCmsMessageById(Long id);
+    public CmsMessage selectCmsMessageById(String id);
 
     /**
      * 查询留言管理列表
@@ -59,7 +59,7 @@ public interface CmsMessageMapper extends BaseMapper<CmsMessage>
      * @param id 留言管理主键
      * @return 结果
      */
-    public int deleteCmsMessageById(Long id);
+    public int deleteCmsMessageById(String id);
 
     /**
      * 批量删除留言管理
@@ -67,7 +67,7 @@ public interface CmsMessageMapper extends BaseMapper<CmsMessage>
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteCmsMessageByIds(Long[] ids);
+    public int deleteCmsMessageByIds(String[] ids);
 
     /**
      * 删除留言管理
@@ -75,7 +75,7 @@ public interface CmsMessageMapper extends BaseMapper<CmsMessage>
      * @param id 留言管理主键
      * @return 结果
      */
-    public int updateDelFlagById(Long id);
+    public int updateDelFlagById(String id);
 
     /**
      * 批量删除留言管理
@@ -83,5 +83,5 @@ public interface CmsMessageMapper extends BaseMapper<CmsMessage>
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int updateDelFlagByIds(Long[] ids);
+    public int updateDelFlagByIds(String[] ids);
 }

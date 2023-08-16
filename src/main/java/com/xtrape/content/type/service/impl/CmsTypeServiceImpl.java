@@ -37,7 +37,7 @@ public class CmsTypeServiceImpl implements ICmsTypeService
      * @return 分类管理
      */
     @Override
-    public CmsType selectCmsTypeByTypeId(Long typeId)
+    public CmsType selectCmsTypeByTypeId(String typeId)
     {
         return cmsTypeMapper.selectCmsTypeByTypeId(typeId);
     }
@@ -110,9 +110,9 @@ public class CmsTypeServiceImpl implements ICmsTypeService
      * @return 结果
      */
     @Override
-    public int deleteCmsTypeByTypeIds(Long[] typeIds)
+    public int deleteCmsTypeByTypeIds(String[] typeIds)
     {
-        for (Long typeId : typeIds) {
+        for (String typeId : typeIds) {
             String typePic = cmsTypeMapper.selectCmsTypeByTypeId(typeId).getTypePic();
             if (typePic!=null&&!"".equals(typePic)){
                 int newFileNameSeparatorIndex = typePic.lastIndexOf("/");
@@ -132,7 +132,7 @@ public class CmsTypeServiceImpl implements ICmsTypeService
      * @return 结果
      */
     @Override
-    public int deleteCmsTypeByTypeId(Long typeId)
+    public int deleteCmsTypeByTypeId(String typeId)
     {
         String typePic = cmsTypeMapper.selectCmsTypeByTypeId(typeId).getTypePic();
         if (typePic!=null&&!"".equals(typePic)){
@@ -155,7 +155,7 @@ public class CmsTypeServiceImpl implements ICmsTypeService
     public int cancel(CmsType cmsType) {
         String typePic = cmsType.getTypePic();
         if (typePic!=null&&!"".equals(typePic)){
-            Long typeId = cmsType.getTypeId();
+            String typeId = cmsType.getTypeId();
             if (typeId==null){
                 int newFileNameSeparatorIndex = typePic.lastIndexOf("/");
                 String FileName = typePic.substring(newFileNameSeparatorIndex + 1).toLowerCase();

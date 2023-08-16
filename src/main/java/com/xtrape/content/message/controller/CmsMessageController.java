@@ -2,12 +2,14 @@ package com.xtrape.content.message.controller;
 
 import java.util.List;
 import java.util.Set;
+
+import com.xtrape.server.RequestContext;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.common.security.SecurityContext;
+import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.message.domain.CmsMessageLike;
@@ -59,7 +61,7 @@ public class CmsMessageController extends BaseController
     @PostMapping("/cms/addMessage")
     public AjaxResult addMessage(@RequestBody CmsMessage cmsMessage)
     {
-        Long parentId = cmsMessage.getParentId();
+        String parentId = cmsMessage.getParentId();
         if (parentId!=null){
             CmsMessage message = cmsMessageService.selectCmsMessageById(parentId);
             if (message.getMainId()!=null){
@@ -97,12 +99,14 @@ public class CmsMessageController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsMessage cmsMessage)
     {
+        RequestContext requestContext = RequestContextHolder.take();
+
         startPage();
         // 角色集合
-        Set<String> roles = permissionService.getRolePermission(getLoginUser().getUserId());
-        if (!SecurityContext.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-            cmsMessage.setCreateBy(getUserName());
-        }
+        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+//            cmsMessage.setCreateBy(getUserName());
+//        }
         cmsMessage.setDelFlag("0");
         List<CmsMessage> list = cmsMessageService.selectCmsMessageList(cmsMessage);
         return getDataTable(list);
@@ -126,7 +130,7 @@ public class CmsMessageController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('cms:message:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id)
+    public AjaxResult getInfo(@PathVariable("id") String id)
     {
         return AjaxResult.success(cmsMessageService.selectCmsMessageById(id));
     }
@@ -159,7 +163,7 @@ public class CmsMessageController extends BaseController
     @PreAuthorize("@ss.hasPermi('cms:message:remove')")
     @Log(title = "留言管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids)
+    public AjaxResult remove(@PathVariable String[] ids)
     {
         return toAjax(cmsMessageService.deleteCmsMessageByIds(ids));
     }

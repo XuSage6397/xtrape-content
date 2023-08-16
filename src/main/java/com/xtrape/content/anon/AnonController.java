@@ -64,7 +64,7 @@ public class AnonController extends BaseController {
      * 首页获取文章详细信息
      */
     @GetMapping(value = {"/pickup/{id}"})
-    public AjaxResult pickup(@PathVariable(value = "id", required = false) Long id) {
+    public AjaxResult pickup(@PathVariable(value = "id", required = false) String id) {
         AjaxResult ajax = AjaxResult.success();
         CmsType cmsType = new CmsType();
         CmsTag cmsTag = new CmsTag();
