@@ -3,14 +3,14 @@ package com.xtrape.content.fileInfo.controller;
 import java.util.List;
 import java.util.Set;
 
-import com.xtrape.server.RequestContext;
+import com.xtrape.context.XtrapeContext;
+import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.exception.ServiceException;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.system.service.ISysPermissionService;
@@ -51,7 +51,7 @@ public class SysFileInfoController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(SysFileInfo sysFileInfo)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         startPage();
         //判断用户权限

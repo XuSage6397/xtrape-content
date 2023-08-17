@@ -2,8 +2,8 @@ package com.xtrape.content.blog.controller;
 
 import java.util.List;
 
-import com.xtrape.server.RequestContext;
-import com.xtrape.server.RequestContextHolder;
+import com.xtrape.context.XtrapeContext;
+import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
@@ -164,7 +164,7 @@ public class CmsBlogController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsBlog cmsBlog)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         startPage();
         AjaxResult roleResult = systemFeignService.listMnemonicByMemberPortal();
@@ -219,7 +219,7 @@ public class CmsBlogController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsBlog cmsBlog)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         cmsBlog.setCreateBy(requestContext.getNickname());
         String blogId = cmsBlogService.insertCmsBlog(cmsBlog);
@@ -237,7 +237,7 @@ public class CmsBlogController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsBlog cmsBlog)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         cmsBlog.setUpdateBy(requestContext.getNickname());
         //删除原首图

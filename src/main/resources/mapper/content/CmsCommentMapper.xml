@@ -43,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY c.create_time DESC
     </select>
     
-    <select id="selectCmsCommentById" parameterType="Long" resultMap="CmsCommentResult">
+    <select id="selectCmsCommentById" resultMap="CmsCommentResult">
         <include refid="selectCmsCommentVo"/>
         where id = #{id}
     </select>
@@ -122,17 +122,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         where id = #{id}
     </update>
-    <update id="updateDelFlagById" parameterType="Long">
+    <update id="updateDelFlagById">
         Update cms_comment Set del_flag = '1' where id = #{id}
     </update>
-    <update id="updateDelFlagByIds" parameterType="Long">
+    <update id="updateDelFlagByIds">
         Update cms_comment Set del_flag = '1' where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 
-    <delete id="deleteCmsCommentById" parameterType="Long">
+    <delete id="deleteCmsCommentById">
         delete from cms_comment where id = #{id}
     </delete>
 

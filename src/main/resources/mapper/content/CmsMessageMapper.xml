@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY create_time ASC
     </select>
 
-    <select id="selectCmsMessageById" parameterType="Long" resultMap="CmsMessageResult">
+    <select id="selectCmsMessageById" resultMap="CmsMessageResult">
         <include refid="selectCmsMessageVo"/>
         where id = #{id}
     </select>
@@ -120,17 +120,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </trim>
         where id = #{id}
     </update>
-    <update id="updateDelFlagById" parameterType="Long">
+    <update id="updateDelFlagById">
         Update cms_message Set del_flag = '1' where id = #{id}
     </update>
-    <update id="updateDelFlagByIds" parameterType="Long">
+    <update id="updateDelFlagByIds">
         Update cms_message Set del_flag = '1' where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>
     </update>
 
-    <delete id="deleteCmsMessageById" parameterType="Long">
+    <delete id="deleteCmsMessageById">
         delete from cms_message where id = #{id}
     </delete>
 

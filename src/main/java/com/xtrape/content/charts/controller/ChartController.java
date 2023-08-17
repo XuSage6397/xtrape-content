@@ -17,8 +17,8 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
-import com.xtrape.server.RequestContext;
-import com.xtrape.server.RequestContextHolder;
+import com.xtrape.context.XtrapeContext;
+import com.xtrape.context.XtrapeContextHolder;
 import com.xtrape.system.service.ISysPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +59,7 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/total")
     public Map total() {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         Map total = new HashMap();
         CmsBlog cmsBlog = new CmsBlog();
@@ -94,7 +94,7 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/lineChart")
     public Map lineChart() {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");
@@ -176,7 +176,7 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/pieChart")
     public Map pieChart() {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         Map pieChart = new HashMap();
         CmsType cmsType = new CmsType();
@@ -205,7 +205,7 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/tagChart")
     public Map tagChart() {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         Map tagChart = new HashMap();
         CmsTag cmsTag = new CmsTag();
@@ -228,7 +228,7 @@ public class ChartController extends BaseController {
      */
     @GetMapping("/essayChart")
     public Map essayChart() {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SimpleDateFormat sd=new SimpleDateFormat("yyyy-MM-dd");

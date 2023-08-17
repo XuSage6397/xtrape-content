@@ -66,17 +66,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY Top DESC, create_time DESC
     </select>
     
-    <select id="selectCmsBlogById" parameterType="Long" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogById" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
         where id = #{id}
     </select>
-    <select id="selectCmsBlogListByTypeId" parameterType="Long" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListByTypeId" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="id != null  and id != ''"> and id in (SELECT blog_id FROM cms_blog_type WHERE type_id  = #{id})</if>
         </where>
     </select>
-    <select id="selectCmsBlogListByTagId" parameterType="Long" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListByTagId" resultMap="CmsBlogResult">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="id != null  and id != ''"> and id in (SELECT blog_id FROM cms_blog_tag WHERE tag_id  = #{id})</if>
@@ -175,7 +175,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteCmsBlogById" parameterType="Long">
+    <delete id="deleteCmsBlogById">
         delete from cms_blog where id = #{id}
     </delete>
 

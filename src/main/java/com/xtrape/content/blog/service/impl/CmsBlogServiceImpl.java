@@ -13,6 +13,7 @@ import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.mapper.CmsTagMapper;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.mapper.CmsTypeMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xtrape.content.blog.mapper.CmsBlogMapper;
@@ -25,6 +26,7 @@ import com.xtrape.content.blog.service.ICmsBlogService;
  * @author ning
  * @date 2022-01-01
  */
+@Slf4j
 @Service
 public class CmsBlogServiceImpl implements ICmsBlogService 
 {
@@ -254,6 +256,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
         }
         for (CmsBlog blog : cmsBlogList) {
             String blogId = blog.getId();
+            log.info("-----------------------------------: {}", blogId);
             //查询标签列表
             List<CmsBlogTag> blogTagList = cmsBlogTagMapper.selectBlogTagList(blogId);
             List<CmsTag> cmsTagList = new ArrayList<>();

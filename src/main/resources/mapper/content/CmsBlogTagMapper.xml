@@ -13,24 +13,24 @@
         </foreach>
     </insert>
 
-    <delete id="deleteBlogTagByBlogId" parameterType="Long">
+    <delete id="deleteBlogTagByBlogId">
         delete from cms_blog_tag where blog_id=#{blogId}
     </delete>
 
-    <delete id="deleteBlogTag" parameterType="Long">
+    <delete id="deleteBlogTag">
         delete from cms_blog_tag where blog_id in
         <foreach collection="array" item="blogId" open="(" separator="," close=")">
             #{blogId}
         </foreach>
     </delete>
-    <delete id="deleteBlogTagByTagId" parameterType="Long">
+    <delete id="deleteBlogTagByTagId">
         delete from cms_blog_tag where tag_id=#{tagId}
     </delete>
 
-    <select id="selectBlogTagList" parameterType="Long" resultMap="blogTagResult">
+    <select id="selectBlogTagList" resultMap="blogTagResult">
         select tag_id, blog_id from cms_blog_tag where blog_id = #{blogId}
     </select>
-    <select id="countBlogByTagId" parameterType="Long" resultType="java.lang.Integer">
+    <select id="countBlogByTagId" resultType="java.lang.Integer">
         select count(*) from cms_blog_tag where tag_id=#{tagId}
     </select>
 </mapper>

@@ -13,18 +13,18 @@
         </foreach>
     </insert>
 
-    <delete id="deleteFileBlogByBlogId" parameterType="Long">
+    <delete id="deleteFileBlogByBlogId" >
         delete from cms_blog_file where blog_id=#{blogId}
     </delete>
 
-    <delete id="deleteFileBlog" parameterType="Long">
+    <delete id="deleteFileBlog" >
         delete from cms_blog_file where blog_id in
         <foreach collection="array" item="blogId" open="(" separator="," close=")">
             #{blogId}
         </foreach>
     </delete>
 
-    <select id="selectFileBlogList" parameterType="Long" resultMap="FileBlogResult">
+    <select id="selectFileBlogList"  resultMap="FileBlogResult">
         select file_id, blog_id from cms_blog_file where blog_id = #{blogId}
     </select>
 </mapper>

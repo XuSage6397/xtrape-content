@@ -3,13 +3,13 @@ package com.xtrape.content.comment.controller;
 import java.util.List;
 import java.util.Set;
 
-import com.xtrape.server.RequestContext;
+import com.xtrape.context.XtrapeContext;
+import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.comment.domain.CmsCommentLike;
@@ -100,7 +100,7 @@ public class CmsCommentController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsComment cmsComment)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
         // 角色集合
         Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
 //        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){

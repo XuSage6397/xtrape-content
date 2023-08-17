@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY create_time DESC
     </select>
     
-    <select id="selectCmsTagByTagId" parameterType="Long" resultMap="CmsTagResult">
+    <select id="selectCmsTagByTagId" resultMap="CmsTagResult">
         <include refid="selectCmsTagVo"/>
         where tag_id = #{tagId}
     </select>
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where tag_id = #{tagId}
     </update>
 
-    <delete id="deleteCmsTagByTagId" parameterType="Long">
+    <delete id="deleteCmsTagByTagId">
         delete from cms_tag where tag_id = #{tagId}
     </delete>
 

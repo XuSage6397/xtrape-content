@@ -30,11 +30,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY create_time DESC
     </select>
     
-    <select id="selectCmsTypeByTypeId" parameterType="Long" resultMap="CmsTypeResult">
+    <select id="selectCmsTypeByTypeId" resultMap="CmsTypeResult">
         <include refid="selectCmsTypeVo"/>
         where type_id = #{typeId}
     </select>
-    <select id="selectCmsTypeListByTypeName" parameterType="String" resultMap="CmsTypeResult">
+    <select id="selectCmsTypeListByTypeName" resultMap="CmsTypeResult">
         <include refid="selectCmsTypeVo"/>
         where type_name = #{typeName}
     </select>
@@ -78,7 +78,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where type_id = #{typeId}
     </update>
 
-    <delete id="deleteCmsTypeByTypeId" parameterType="Long">
+    <delete id="deleteCmsTypeByTypeId">
         delete from cms_type where type_id = #{typeId}
     </delete>
 

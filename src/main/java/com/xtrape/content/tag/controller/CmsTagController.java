@@ -3,13 +3,13 @@ package com.xtrape.content.tag.controller;
 import java.util.List;
 import java.util.Set;
 
-import com.xtrape.server.RequestContext;
+import com.xtrape.context.XtrapeContext;
+import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
-import com.xtrape.server.RequestContextHolder;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.tag.service.ICmsTagService;
@@ -50,7 +50,7 @@ public class CmsTagController extends BaseController
     @GetMapping("/list")
     public TableDataInfo list(CmsTag cmsTag)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         startPage();
         // 角色集合
@@ -93,7 +93,7 @@ public class CmsTagController extends BaseController
     @PostMapping
     public AjaxResult add(@RequestBody CmsTag cmsTag)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         cmsTag.setCreateBy(requestContext.getNickname());
         return toAjax(cmsTagService.insertCmsTag(cmsTag));
@@ -107,7 +107,7 @@ public class CmsTagController extends BaseController
     @PutMapping
     public AjaxResult edit(@RequestBody CmsTag cmsTag)
     {
-        RequestContext requestContext = RequestContextHolder.take();
+        XtrapeContext requestContext = XtrapeContextHolder.take();
 
         cmsTag.setUpdateBy(requestContext.getNickname());
         return toAjax(cmsTagService.updateCmsTag(cmsTag));

@@ -13,18 +13,18 @@
         </foreach>
     </insert>
 
-    <delete id="deleteFileNoticeByNoticeId" parameterType="Long">
+    <delete id="deleteFileNoticeByNoticeId">
         delete from sys_notice_file where notice_id=#{noticeId}
     </delete>
 
-    <delete id="deleteFileNotice" parameterType="Long">
+    <delete id="deleteFileNotice">
         delete from sys_notice_file where notice_id in
         <foreach collection="array" item="noticeId" open="(" separator="," close=")">
             #{noticeId}
         </foreach>
     </delete>
 
-    <select id="selectFileNoticeList" parameterType="Long" resultMap="FileNoticeResult">
+    <select id="selectFileNoticeList" resultMap="FileNoticeResult">
         select file_id, notice_id from sys_notice_file where notice_id = #{noticeId}
     </select>
 </mapper>

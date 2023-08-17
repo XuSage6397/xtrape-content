@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY create_time DESC
     </select>
     
-    <select id="selectSysFileInfoByFileId" parameterType="Long" resultMap="SysFileInfoResult">
+    <select id="selectSysFileInfoByFileId" resultMap="SysFileInfoResult">
         <include refid="selectSysFileInfoVo"/>
         where file_id = #{fileId}
     </select>
@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where file_id = #{fileId}
     </update>
 
-    <delete id="deleteSysFileInfoByFileId" parameterType="Long">
+    <delete id="deleteSysFileInfoByFileId">
         delete from sys_file_info where file_id = #{fileId}
     </delete>
 
