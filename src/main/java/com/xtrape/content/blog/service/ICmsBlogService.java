@@ -1,8 +1,11 @@
 package com.xtrape.content.blog.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.blog.domain.CmsBlogSearch;
+import com.xtrape.system.entry.EntrySchema;
 
 /**
  * 文章管理Service接口
@@ -10,7 +13,7 @@ import com.xtrape.content.blog.domain.CmsBlogSearch;
  * @author ning
  * @date 2022-01-01
  */
-public interface ICmsBlogService 
+public interface ICmsBlogService extends IService<CmsBlog>
 {
     /**
      * 查询文章管理

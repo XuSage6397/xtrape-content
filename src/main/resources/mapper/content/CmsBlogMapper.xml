@@ -26,11 +26,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCmsBlogVo">
-        select id, create_by, create_time, update_by, update_time, title, type, content, content_type, content_markdown, Top, views, status, blog_pic_type, blog_pic, blog_pic_link, blog_desc, blog_files from cms_blog
+        select id, create_by, create_time, update_by, update_time, title, type, content, content_type, content_markdown, Top, views, status, blog_pic_type, blog_pic, blog_pic_link, blog_desc, blog_files, pattern, notes, dialect from cms_blog
     </sql>
 
-    <select id="selectCmsBlogList" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogList" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
+        <if test="cat != null">
+        INNER JOIN cms_blog_type cat ON cat.blog_id = cms_blog.id
+        </if>
         <where>  
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
             <if test="type != null  and type != ''"> and type = #{type}</if>
@@ -39,11 +42,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="views != null "> and views = #{views}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="createBy != null  and createBy != ''"> and create_by = #{createBy}</if>
+            <if test="cat != null">
+                cat.type_id = #{cat}
+            </if>
         </where>
         ORDER BY Top DESC, create_time DESC
     </select>
 
-    <select id="inquire" resultMap="CmsBlogResult">
+    <select id="inquire" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="title != null  and title != ''">
@@ -66,23 +72,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         ORDER BY Top DESC, create_time DESC
     </select>
     
-    <select id="selectCmsBlogById" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogById" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
         where id = #{id}
     </select>
-    <select id="selectCmsBlogListByTypeId" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListByTypeId" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="id != null  and id != ''"> and id in (SELECT blog_id FROM cms_blog_type WHERE type_id  = #{id})</if>
         </where>
     </select>
-    <select id="selectCmsBlogListByTagId" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListByTagId" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="id != null  and id != ''"> and id in (SELECT blog_id FROM cms_blog_tag WHERE tag_id  = #{id})</if>
         </where>
     </select>
-    <select id="selectCmsBlogListRecommend" resultMap="CmsBlogResult">
+    <select id="selectCmsBlogListRecommend" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
         <where>
             <if test="title != null  and title != ''"> and title like concat('%', #{title}, '%')</if>
@@ -112,6 +118,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertCmsBlog" useGeneratedKeys="true" keyProperty="id">
         insert into cms_blog
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -129,8 +136,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogPicLink != null and blogPicLink != ''">blog_pic_link,</if>
             <if test="blogDesc != null and blogDesc != ''">blog_desc,</if>
             <if test="blogFiles != null and blogFiles != ''">blog_files,</if>
+            <if test="dialect != null and dialect != ''">dialect,</if>
+            <if test="pattern != null and pattern != ''">pattern,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>
@@ -148,6 +158,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogPicLink != null and blogPicLink != ''">#{blogPicLink},</if>
             <if test="blogDesc != null and blogDesc != ''">#{blogDesc},</if>
             <if test="blogFiles != null and blogFiles != ''">#{blogFiles},</if>
+            <if test="dialect != null and dialect != ''">#{dialect},</if>
+            <if test="pattern != null and pattern != ''">#{pattern},</if>
          </trim>
     </insert>
 

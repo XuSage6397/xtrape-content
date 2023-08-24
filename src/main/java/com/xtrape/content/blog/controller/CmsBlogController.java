@@ -2,8 +2,10 @@ package com.xtrape.content.blog.controller;
 
 import com.xtrape.common.core.annotation.Log;
 import com.xtrape.common.core.enums.BusinessType;
+import com.xtrape.common.core.utils.MD5Utils;
 import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
+import com.xtrape.common.core.utils.uuid.UUID;
 import com.xtrape.common.core.web.domain.AjaxResult;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.common.security.web.controller.BaseController;
@@ -200,7 +202,10 @@ public class CmsBlogController extends BaseController {
     public AjaxResult add(@RequestBody CmsBlog cmsBlog) {
         XtrapeContext requestContext = XtrapeContextHolder.take();
 
-        cmsBlog.setCreateBy(requestContext.getNickname());
+        cmsBlog.setCreateBy(requestContext.getMember());
+        if (cmsBlog.getId() == null) {
+            cmsBlog.setId(UUID.randomUUID(true).toString(true));
+        }
         String blogId = cmsBlogService.insertCmsBlog(cmsBlog);
         if (blogId == null) {
             return AjaxResult.error();
@@ -220,16 +225,16 @@ public class CmsBlogController extends BaseController {
         cmsBlog.setUpdateBy(requestContext.getNickname());
         //删除原首图
         CmsBlog oldBlog = cmsBlogService.selectCmsBlogById(cmsBlog.getId());
-        if (cmsBlog.getBlogPic().isEmpty() || !cmsBlog.getBlogPic().equals(oldBlog.getBlogPic())) {
-            if (!oldBlog.getBlogPic().isEmpty()) {
-                String blogPic = oldBlog.getBlogPic();
-                if (blogPic != null && !"".equals(blogPic)) {
-                    int newFileNameSeparatorIndex = blogPic.lastIndexOf("/");
-                    String FileName = blogPic.substring(newFileNameSeparatorIndex + 1).toLowerCase();
-                    sysFileInfoService.deleteSysFileInfoByFileObjectName(FileName);
-                }
-            }
-        }
+//        if (cmsBlog.getBlogPic().isEmpty() || !cmsBlog.getBlogPic().equals(oldBlog.getBlogPic())) {
+//            if (!oldBlog.getBlogPic().isEmpty()) {
+//                String blogPic = oldBlog.getBlogPic();
+//                if (blogPic != null && !"".equals(blogPic)) {
+//                    int newFileNameSeparatorIndex = blogPic.lastIndexOf("/");
+//                    String FileName = blogPic.substring(newFileNameSeparatorIndex + 1).toLowerCase();
+//                    sysFileInfoService.deleteSysFileInfoByFileObjectName(FileName);
+//                }
+//            }
+//        }
         return toAjax(cmsBlogService.updateCmsBlog(cmsBlog));
     }
 

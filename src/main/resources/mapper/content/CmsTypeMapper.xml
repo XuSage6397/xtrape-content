@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectCmsTypeVo">
-        select type_id, create_by, create_time, update_by, update_time, type_name, type_pic_type, type_pic, type_pic_link from cms_type
+        select type_id, create_by, create_time, update_by, update_time, type_name, type_pic_type, type_pic, type_pic_link, notes, patterns from cms_type
     </sql>
 
     <select id="selectCmsTypeList" resultMap="CmsTypeResult">

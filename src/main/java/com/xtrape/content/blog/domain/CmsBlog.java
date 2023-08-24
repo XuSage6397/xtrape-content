@@ -1,10 +1,14 @@
 package com.xtrape.content.blog.domain;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.xtrape.common.core.annotation.Excel;
 import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.type.domain.CmsType;
 import lombok.Data;
 import lombok.experimental.Accessors;
+import nonapi.io.github.classgraph.json.Id;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.domain.BaseEntity;
@@ -20,11 +24,16 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class CmsBlog extends BaseEntity {
+
     private static final long serialVersionUID = 1L;
 
+    String cat;
+
+    String notes;
     /**
      * ID
      */
+    @TableId
     private String id;
 
     /**
@@ -35,9 +44,11 @@ public class CmsBlog extends BaseEntity {
 
     /**
      * 类型 1文章 2随笔
+     * todo: remove, replaced by pattern
      */
     @Excel(name = "类型")
     private String type;
+
 
     /**
      * 内容
@@ -95,6 +106,12 @@ public class CmsBlog extends BaseEntity {
 
     /** 附件列表 */
     private String blogFiles;
+
+    String script;
+
+    String dialect;
+
+    String pattern;
 
     /**
      * 分类

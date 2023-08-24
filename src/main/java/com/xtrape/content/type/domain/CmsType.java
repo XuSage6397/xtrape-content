@@ -22,6 +22,10 @@ public class CmsType extends BaseEntity
     /** 分类ID */
     private String typeId;
 
+    private String notes;
+
+    String patterns;
+
     /** 分类名称 */
     @Excel(name = "分类名称")
     private String typeName;

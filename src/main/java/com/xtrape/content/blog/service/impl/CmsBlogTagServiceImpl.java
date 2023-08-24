@@ -6,7 +6,10 @@ package com.xtrape.content.blog.service.impl;
  * @Date: 2022/1/2 23:24
  */
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.blog.domain.CmsBlogTag;
+import com.xtrape.content.blog.mapper.CmsBlogMapper;
 import com.xtrape.content.blog.mapper.CmsBlogTagMapper;
 import com.xtrape.content.blog.service.ICmsBlogTagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,28 +23,28 @@ import java.util.List;
  * @Date: 2022/1/2 23:24
  **/
 @Service
-public class CmsBlogTagServiceImpl implements ICmsBlogTagService {
+public class CmsBlogTagServiceImpl extends ServiceImpl<CmsBlogTagMapper, CmsBlogTag> implements ICmsBlogTagService {
 
-    @Autowired
-    CmsBlogTagMapper cmsBlogTagMapper;
+//    @Autowired
+//    CmsBlogTagMapper cmsBlogTagMapper;
 
     @Override
     public int batchBlogTag(List<CmsBlogTag> blogTagList) {
-        return cmsBlogTagMapper.batchBlogTag(blogTagList);
+        return baseMapper.batchBlogTag(blogTagList);
     }
 
     @Override
     public int deleteBlogTagByBlogId(String blogId) {
-        return cmsBlogTagMapper.deleteBlogTagByBlogId(blogId);
+        return baseMapper.deleteBlogTagByBlogId(blogId);
     }
 
     @Override
     public int deleteBlogTag(String[] ids) {
-        return cmsBlogTagMapper.deleteBlogTag(ids);
+        return baseMapper.deleteBlogTag(ids);
     }
 
     @Override
     public List<CmsBlogTag> selectBlogTagList(String blogId) {
-        return cmsBlogTagMapper.selectBlogTagList(blogId);
+        return baseMapper.selectBlogTagList(blogId);
     }
 }

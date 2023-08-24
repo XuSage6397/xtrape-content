@@ -1,5 +1,6 @@
 package com.xtrape.content.blog.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.xtrape.content.blog.domain.CmsBlogTag;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Description: 〈${DESCRIPTION}〉
  * @Date: 2022/1/2 23:22
  */
-public interface ICmsBlogTagService {
+public interface ICmsBlogTagService extends IService<CmsBlogTag> {
     /**
      * 批量新增
      */

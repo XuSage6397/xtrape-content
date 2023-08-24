@@ -3,21 +3,22 @@ package com.xtrape.content.blog.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xtrape.common.core.utils.DateUtils;
-import com.xtrape.content.blog.domain.CmsBlogSearch;
-import com.xtrape.content.blog.domain.CmsBlogTag;
-import com.xtrape.content.blog.domain.CmsBlogType;
+import com.xtrape.common.core.utils.uuid.UUID;
+import com.xtrape.content.blog.domain.*;
 import com.xtrape.content.blog.mapper.CmsBlogTagMapper;
 import com.xtrape.content.blog.mapper.CmsBlogTypeMapper;
 import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.tag.mapper.CmsTagMapper;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.mapper.CmsTypeMapper;
+import com.xtrape.system.entry.EntryMapper;
+import com.xtrape.system.entry.EntrySchema;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xtrape.content.blog.mapper.CmsBlogMapper;
-import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.blog.service.ICmsBlogService;
 
 /**
@@ -28,7 +29,7 @@ import com.xtrape.content.blog.service.ICmsBlogService;
  */
 @Slf4j
 @Service
-public class CmsBlogServiceImpl implements ICmsBlogService 
+public class CmsBlogServiceImpl extends ServiceImpl<CmsBlogMapper, CmsBlog>  implements ICmsBlogService
 {
     @Autowired
     private CmsBlogMapper cmsBlogMapper;
@@ -138,6 +139,7 @@ public class CmsBlogServiceImpl implements ICmsBlogService
     public String insertCmsBlog(CmsBlog cmsBlog)
     {
         cmsBlog.setCreateTime(DateUtils.getNowDate());
+        cmsBlog.setId(UUID.fastUUID().toString(true));
         cmsBlogMapper.insertCmsBlog(cmsBlog);
         String blogId = cmsBlog.getId();
         //新增文章标签
