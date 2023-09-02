@@ -7,9 +7,17 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class CmsBlogSearch {
 
+    String title;
+
     Long[] ids;
 
-    String[] types;
+    String[] cats;
+
+    String[] dialects;
+
+    int[] types;
 
     int[] statuses;
+
+    Integer[] tops;
 }

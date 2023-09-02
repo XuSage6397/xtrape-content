@@ -14,13 +14,13 @@ import com.xtrape.content.tag.service.ICmsTagService;
 import com.xtrape.content.type.domain.CmsType;
 import com.xtrape.content.type.service.ICmsTypeService;
 import com.xtrape.system.service.ISysPermissionService;
+import lombok.Data;
+import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -48,18 +48,28 @@ public class AnonController extends BaseController {
     /**
      * list
      */
-    @GetMapping("/list/{categories}")
-    public TableDataInfo list(@PathVariable(value = "categories", required = false) String categories) {
-        String[] categoryArray = categories.split(",");
-        startPage();
+    @PostMapping("/list")
+    public TableDataInfo list(@RequestBody ListBlogParams params) {
+        String[] categoryArray = params.getCategory().split(",");
+        startPage(params);
         CmsBlogSearch cmsBlogSearch = new CmsBlogSearch();
-        cmsBlogSearch.setTypes(categoryArray);
+        cmsBlogSearch.setCats(categoryArray);
         cmsBlogSearch.setStatuses(new int[] { 1 });
-
+        cmsBlogSearch.setTypes(new int[] { 1 });
+        cmsBlogSearch.setDialects(new String[] {params.getDialect()});
+        if (params.getTop() != null) {
+            cmsBlogSearch.setTops(new Integer[]{params.getTop()});
+        }
         List<CmsBlog> list = cmsBlogService.inquire(cmsBlogSearch);
         return getDataTable(list);
     }
 
+    @GetMapping("/homepage/{lang}")
+    public java.util.Map<String, Object> home(@PathVariable(value = "lang", required = false)String lang) {
+        java.util.Map<String, Object> resultMap = new HashMap<>();
+
+        return resultMap;
+    }
     /**
      * 首页获取文章详细信息
      */

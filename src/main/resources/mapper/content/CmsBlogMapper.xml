@@ -51,22 +51,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="inquire" resultType="com.xtrape.content.blog.domain.CmsBlog">
         <include refid="selectCmsBlogVo"/>
+        <if test="cats != null">
+            INNER JOIN cms_blog_type cat ON cat.blog_id = cms_blog.id
+        </if>
         <where>
             <if test="title != null  and title != ''">
                 and title like concat('%', #{title}, '%')
             </if>
-            <if test="type != null  and type != ''">
+            <if test="types != null  and types != ''">
                 and type in (<foreach collection="types" item="item" separator=",">#{item}</foreach>)
             </if>
-            <if test="content != null  and content != ''">
-                and content = #{content}
-            </if>
-            <if test="top != null  and top != ''">
+            <if test="tops != null  and tops != ''">
                 and top in (<foreach collection="tops" item="item" separator=",">#{item}</foreach>)
             </if>
-            <if test="views != null "> and views = #{views}</if>
-            <if test="status != null  and status != ''">
+            <if test="dialects != null  and dialects != ''">
+                and dialect in (<foreach collection="dialects" item="item" separator=",">#{item}</foreach>)
+            </if>
+            <if test="statuses != null  and statuses != ''">
                 and status in (<foreach collection="statuses" item="item" separator=",">#{item}</foreach>)
+            </if>
+            <if test="cats != null  and cats != ''">
+                and cat.type_id in (<foreach collection="cats" item="item" separator=",">#{item}</foreach>)
             </if>
         </where>
         ORDER BY Top DESC, create_time DESC
@@ -183,6 +188,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogPicLink != null">blog_pic_link = #{blogPicLink},</if>
             <if test="blogDesc != null">blog_desc = #{blogDesc},</if>
             <if test="blogFiles != null">blog_files = #{blogFiles},</if>
+            <if test="dialect != null">dialect = #{dialect},</if>
         </trim>
         where id = #{id}
     </update>
