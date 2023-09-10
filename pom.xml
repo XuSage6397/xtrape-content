@@ -42,12 +42,6 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
-        <!-- Swagger UI -->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
@@ -56,7 +50,7 @@
         <!-- xtrape Common DataSource -->
         <dependency>
             <groupId>com.xtrape</groupId>
-            <artifactId>xtrape-common-datasource</artifactId>
+            <artifactId>xtrape-common-security</artifactId>
         </dependency>
 
         <!-- xtrape Common DataScope -->
@@ -82,32 +76,14 @@
             <artifactId>xtrape-system-mortise</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
         <dependency>
             <groupId>jakarta.mail</groupId>
             <artifactId>jakarta.mail-api</artifactId>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.web3j/crypto -->
-        <dependency>
-            <groupId>org.web3j</groupId>
-            <artifactId>crypto</artifactId>
-            <version>4.9.6</version>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/org.web3j/core -->
-        <dependency>
-            <groupId>org.web3j</groupId>
-            <artifactId>core</artifactId>
-            <version>4.9.6</version>
-        </dependency>
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.xtrape</groupId>
-            <artifactId>xtrape-common-core</artifactId>
-            <version>3.5.0</version>
         </dependency>
 
         <!--        archive-->
