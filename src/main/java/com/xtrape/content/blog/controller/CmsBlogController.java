@@ -253,7 +253,7 @@ public class CmsBlogController extends BaseController {
                 if (blogPic != null && !"".equals(blogPic)) {
                     int newFileNameSeparatorIndex = blogPic.lastIndexOf("/");
                     String FileName = blogPic.substring(newFileNameSeparatorIndex + 1).toLowerCase();
-                    sysFileInfoService.deleteSysFileInfoByFileObjectName(FileName);
+//                    sysFileInfoService.deleteSysFileInfoByFileObjectName(FileName);
                 }
             }
         }
