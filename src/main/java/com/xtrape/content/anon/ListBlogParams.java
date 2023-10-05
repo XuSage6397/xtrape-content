@@ -10,7 +10,7 @@ public class ListBlogParams implements PageUtils.PageParams {
 
     String title;
 
-    String genus;
+    String category;
     String dialect;
 
     Long offset = 0L;

@@ -50,10 +50,10 @@ public class AnonController extends BaseController {
      */
     @PostMapping("/list")
     public TableDataInfo list(@RequestBody ListBlogParams params) {
-        String[] genusArray = params.getGenus().split(",");
+        String[] categoryArray = params.getCategory().split(",");
         startPage(params);
         CmsBlogSearch cmsBlogSearch = new CmsBlogSearch();
-        cmsBlogSearch.setCats(genusArray);
+        cmsBlogSearch.setCats(categoryArray);
         cmsBlogSearch.setStatuses(new int[] { 1 });
         cmsBlogSearch.setTypes(new int[] { 1 });
         cmsBlogSearch.setDialects(new String[] {params.getDialect()});
