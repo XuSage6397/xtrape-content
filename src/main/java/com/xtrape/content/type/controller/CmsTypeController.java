@@ -6,7 +6,7 @@ import java.util.Set;
 import com.xtrape.context.XtrapeContext;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.context.XtrapeContextHolder;
@@ -66,7 +66,7 @@ public class CmsTypeController extends BaseController
      * 导出分类管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:type:export')")
-    @Log(title = "分类管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "分类管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsType cmsType)
     {
@@ -89,7 +89,7 @@ public class CmsTypeController extends BaseController
      * 新增分类管理
      */
     @PreAuthorize("@ss.hasPermi('cms:type:add')")
-    @Log(title = "分类管理", businessType = BusinessType.INSERT)
+    @Log2(title = "分类管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsType cmsType)
     {
@@ -102,7 +102,7 @@ public class CmsTypeController extends BaseController
      * 修改分类管理
      */
     @PreAuthorize("@ss.hasPermi('cms:type:edit')")
-    @Log(title = "分类管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "分类管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsType cmsType)
     {
@@ -115,7 +115,7 @@ public class CmsTypeController extends BaseController
      * 删除分类管理
      */
     @PreAuthorize("@ss.hasPermi('cms:type:remove')")
-    @Log(title = "分类管理", businessType = BusinessType.DELETE)
+    @Log2(title = "分类管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{typeIds}")
     public AjaxResult remove(@PathVariable String[] typeIds)
     {

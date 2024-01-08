@@ -7,7 +7,7 @@ import com.xtrape.context.XtrapeContext;
 import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.security.web.controller.BaseController;
@@ -66,7 +66,7 @@ public class CmsTagController extends BaseController
      * 导出标签管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:tag:export')")
-    @Log(title = "标签管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "标签管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsTag cmsTag)
     {
@@ -89,7 +89,7 @@ public class CmsTagController extends BaseController
      * 新增标签管理
      */
     @PreAuthorize("@ss.hasPermi('cms:tag:add')")
-    @Log(title = "标签管理", businessType = BusinessType.INSERT)
+    @Log2(title = "标签管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsTag cmsTag)
     {
@@ -103,7 +103,7 @@ public class CmsTagController extends BaseController
      * 修改标签管理
      */
     @PreAuthorize("@ss.hasPermi('cms:tag:edit')")
-    @Log(title = "标签管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "标签管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsTag cmsTag)
     {
@@ -117,7 +117,7 @@ public class CmsTagController extends BaseController
      * 删除标签管理
      */
     @PreAuthorize("@ss.hasPermi('cms:tag:remove')")
-    @Log(title = "标签管理", businessType = BusinessType.DELETE)
+    @Log2(title = "标签管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{tagIds}")
     public AjaxResult remove(@PathVariable String[] tagIds)
     {

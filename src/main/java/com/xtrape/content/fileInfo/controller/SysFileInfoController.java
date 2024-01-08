@@ -7,7 +7,7 @@ import com.xtrape.context.XtrapeContext;
 import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.exception.ServiceException;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
@@ -72,7 +72,7 @@ public class SysFileInfoController extends BaseController
      * 导出文件管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:fileInfo:export')")
-    @Log(title = "文件管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "文件管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, SysFileInfo sysFileInfo)
     {
@@ -95,7 +95,7 @@ public class SysFileInfoController extends BaseController
      * 新增文件管理
      */
     @PreAuthorize("@ss.hasPermi('cms:fileInfo:add')")
-    @Log(title = "文件管理", businessType = BusinessType.INSERT)
+    @Log2(title = "文件管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody SysFileInfo sysFileInfo)
     {
@@ -106,7 +106,7 @@ public class SysFileInfoController extends BaseController
      * 修改文件管理
      */
     @PreAuthorize("@ss.hasPermi('cms:fileInfo:edit')")
-    @Log(title = "文件管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "文件管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody SysFileInfo sysFileInfo)
     {
@@ -117,7 +117,7 @@ public class SysFileInfoController extends BaseController
      * 删除文件管理
      */
     @PreAuthorize("@ss.hasPermi('cms:fileInfo:remove')")
-    @Log(title = "文件管理", businessType = BusinessType.DELETE)
+    @Log2(title = "文件管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{fileIds}")
     public AjaxResult remove(@PathVariable Long[] fileIds)
     {

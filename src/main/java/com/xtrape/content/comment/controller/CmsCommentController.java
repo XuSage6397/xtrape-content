@@ -7,7 +7,7 @@ import com.xtrape.context.XtrapeContext;
 import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.security.web.controller.BaseController;
@@ -86,7 +86,7 @@ public class CmsCommentController extends BaseController
     /**
      * 首页删除点赞
      */
-    @Log(title = "删除评论点赞", businessType = BusinessType.DELETE)
+    @Log2(title = "删除评论点赞", businessType = BusinessType.DELETE)
     @PostMapping("/cms/delCmsCommentLike")
     public AjaxResult delCmsCommentLike(@RequestBody CmsCommentLike cmsCommentLike)
     {
@@ -116,7 +116,7 @@ public class CmsCommentController extends BaseController
      * 导出评论管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:export')")
-    @Log(title = "评论管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "评论管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsComment cmsComment)
     {
@@ -139,7 +139,7 @@ public class CmsCommentController extends BaseController
      * 新增评论管理
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:add')")
-    @Log(title = "评论管理", businessType = BusinessType.INSERT)
+    @Log2(title = "评论管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsComment cmsComment)
     {
@@ -150,7 +150,7 @@ public class CmsCommentController extends BaseController
      * 修改评论管理
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:edit')")
-    @Log(title = "评论管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "评论管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsComment cmsComment)
     {
@@ -161,7 +161,7 @@ public class CmsCommentController extends BaseController
      * 删除评论管理
      */
     @PreAuthorize("@ss.hasPermi('cms:comment:remove')")
-    @Log(title = "评论管理", businessType = BusinessType.DELETE)
+    @Log2(title = "评论管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids)
     {

@@ -7,7 +7,7 @@ import com.xtrape.context.XtrapeContext;
 import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.security.web.controller.BaseController;
@@ -85,7 +85,7 @@ public class CmsMessageController extends BaseController
     /**
      * 首页删除点赞
      */
-    @Log(title = "删除留言点赞", businessType = BusinessType.DELETE)
+    @Log2(title = "删除留言点赞", businessType = BusinessType.DELETE)
     @PostMapping("/cms/delCmsMessageLike")
     public AjaxResult delCmsMessageLike(@RequestBody CmsMessageLike cmsMessageLike)
     {
@@ -116,7 +116,7 @@ public class CmsMessageController extends BaseController
      * 导出留言管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:message:export')")
-    @Log(title = "留言管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "留言管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsMessage cmsMessage)
     {
@@ -139,7 +139,7 @@ public class CmsMessageController extends BaseController
      * 新增留言管理
      */
     @PreAuthorize("@ss.hasPermi('cms:message:add')")
-    @Log(title = "留言管理", businessType = BusinessType.INSERT)
+    @Log2(title = "留言管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsMessage cmsMessage)
     {
@@ -150,7 +150,7 @@ public class CmsMessageController extends BaseController
      * 修改留言管理
      */
     @PreAuthorize("@ss.hasPermi('cms:message:edit')")
-    @Log(title = "留言管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "留言管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsMessage cmsMessage)
     {
@@ -161,7 +161,7 @@ public class CmsMessageController extends BaseController
      * 删除留言管理
      */
     @PreAuthorize("@ss.hasPermi('cms:message:remove')")
-    @Log(title = "留言管理", businessType = BusinessType.DELETE)
+    @Log2(title = "留言管理", businessType = BusinessType.DELETE)
 	@DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)
     {

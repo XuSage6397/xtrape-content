@@ -1,8 +1,7 @@
 package com.xtrape.content.blog.controller;
 
-import com.xtrape.common.core.annotation.Log;
+import com.xtrape.common.core.annotation.Log2;
 import com.xtrape.common.core.enums.BusinessType;
-import com.xtrape.common.core.utils.MD5Utils;
 import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.utils.poi.ExcelUtil;
 import com.xtrape.common.core.utils.uuid.UUID;
@@ -168,7 +167,7 @@ public class CmsBlogController extends BaseController {
      * 导出文章管理列表
      */
     @PreAuthorize("@ss.hasPermi('cms:blog:export')")
-    @Log(title = "文章管理", businessType = BusinessType.EXPORT)
+    @Log2(title = "文章管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, CmsBlog cmsBlog) {
         List<CmsBlog> list = cmsBlogService.selectCmsBlogList(cmsBlog);
@@ -197,7 +196,7 @@ public class CmsBlogController extends BaseController {
      * 新增文章管理
      */
     @PreAuthorize("@ss.hasPermi('cms:blog:add')")
-    @Log(title = "文章管理", businessType = BusinessType.INSERT)
+    @Log2(title = "文章管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsBlog cmsBlog) {
         XtrapeContext requestContext = XtrapeContextHolder.take();
@@ -217,7 +216,7 @@ public class CmsBlogController extends BaseController {
      * 修改文章管理
      */
     @PreAuthorize("@ss.hasPermi('cms:blog:edit')")
-    @Log(title = "文章管理", businessType = BusinessType.UPDATE)
+    @Log2(title = "文章管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsBlog cmsBlog) {
         XtrapeContext requestContext = XtrapeContextHolder.take();
@@ -242,7 +241,7 @@ public class CmsBlogController extends BaseController {
      * 删除文章管理
      */
     @PreAuthorize("@ss.hasPermi('cms:blog:remove')")
-    @Log(title = "文章管理", businessType = BusinessType.DELETE)
+    @Log2(title = "文章管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids) {
         //删除原首图
