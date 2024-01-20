@@ -1,6 +1,8 @@
 package com.xtrape.content.comment.service;
 
 import java.util.List;
+
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.xtrape.content.comment.domain.CmsComment;
 import com.xtrape.content.comment.domain.CmsCommentLike;
 
@@ -10,7 +12,7 @@ import com.xtrape.content.comment.domain.CmsCommentLike;
  * @author ning
  * @date 2022-01-21
  */
-public interface ICmsCommentService 
+public interface ICmsCommentService extends IService<CmsComment>
 {
     /**
      * 首页查询留言列表

@@ -3,9 +3,7 @@ package com.xtrape.content.type.domain;
 import com.xtrape.common.core.annotation.Excel;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 
 /**
  * 分类管理对象 cms_type
@@ -15,7 +13,7 @@ import com.xtrape.common.core.domain.BaseEntity;
  */
 @Data
 @Accessors(chain = true)
-public class CmsType extends BaseEntity
+public class CmsType extends BaseEntity2
 {
     private static final long serialVersionUID = 1L;
 

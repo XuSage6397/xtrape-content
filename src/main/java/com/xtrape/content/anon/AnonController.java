@@ -2,11 +2,15 @@ package com.xtrape.content.anon;
 
 import com.xtrape.common.core.utils.StringUtils;
 import com.xtrape.common.core.web.domain.AjaxResult;
+import com.xtrape.common.core.web.domain.R;
+import com.xtrape.common.core.web.page.PaginationEntity;
 import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.common.security.web.controller.BaseController;
 import com.xtrape.content.blog.domain.CmsBlog;
 import com.xtrape.content.blog.domain.CmsBlogSearch;
 import com.xtrape.content.blog.service.ICmsBlogService;
+import com.xtrape.content.comment.domain.CmsComment;
+import com.xtrape.content.comment.service.ICmsCommentService;
 import com.xtrape.content.feign.SystemFeignService;
 import com.xtrape.content.fileInfo.service.ISysFileInfoService;
 import com.xtrape.content.tag.domain.CmsTag;
@@ -45,6 +49,8 @@ public class AnonController extends BaseController {
     @Autowired
     SystemFeignService systemFeignService;
 
+    @Autowired
+    private ICmsCommentService cmsCommentService;
     /**
      * list
      */
@@ -62,6 +68,28 @@ public class AnonController extends BaseController {
         }
         List<CmsBlog> list = cmsBlogService.inquire(cmsBlogSearch);
         return getDataTable(list);
+    }
+
+    /**
+     * 查询评论管理列表
+     */
+    @PostMapping("/listComment")
+    public R<PaginationEntity<CmsComment>> listComment(@RequestBody CmsComment cmsComment)
+    {
+//        XtrapeContext requestContext = XtrapeContextHolder.take();
+        // 角色集合
+//        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
+//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
+//            cmsComment.setCreateBy(getUserName());
+//        }
+        cmsComment.setDelFlag("0");
+        startPage();
+        List<CmsComment> list = cmsCommentService.selectCmsCommentList(cmsComment);
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        PaginationEntity paginationEntity = new PaginationEntity();
+        paginationEntity.setList(list);
+        paginationEntity.setCount(tableDataInfo.getTotal());
+        return R.ok(paginationEntity);
     }
 
     @GetMapping("/homepage/{lang}")

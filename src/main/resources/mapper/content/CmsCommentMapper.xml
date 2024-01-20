@@ -14,6 +14,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="blogId"    column="blog_id"    />
         <result property="delFlag"    column="del_flag"    />
         <result property="userId"    column="user_id"    />
+        <result property="email"    column="email"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -25,8 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </sql>
 
     <select id="selectCmsCommentList" resultMap="CmsCommentResult">
-        select c.id, c.parent_id, c.main_id, c.like_num, c.content, c.type, c.blog_id, c.del_flag, c.user_id, c.create_by, c.create_time, c.update_by, c.update_time from cms_comment c LEFT JOIN cms_blog b ON c.blog_id = b.id
-        <where>  
+        select c.id, c.parent_id, c.main_id, c.like_num, c.content, c.type, c.blog_id, c.del_flag, c.user_id, c.email, c.create_by, c.create_time, c.update_by, c.update_time
+            from cms_comment c LEFT JOIN cms_blog b ON c.blog_id = b.id
+        <where>
             <if test="parentId != null "> and c.parent_id = #{parentId}</if>
             <if test="mainId != null "> and c.main_id = #{mainId}</if>
             <if test="likeNum != null "> and c.like_num = #{likeNum}</if>
@@ -83,6 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null">blog_id,</if>
             <if test="delFlag != null">del_flag,</if>
             <if test="userId != null">user_id,</if>
+            <if test="email != null">email,</if>
             <if test="createBy != null">create_by,</if>
             <if test="createTime != null">create_time,</if>
             <if test="updateBy != null">update_by,</if>
@@ -97,6 +100,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="blogId != null">#{blogId},</if>
             <if test="delFlag != null">#{delFlag},</if>
             <if test="userId != null">#{userId},</if>
+            <if test="email != null">#{email},</if>
             <if test="createBy != null">#{createBy},</if>
             <if test="createTime != null">#{createTime},</if>
             <if test="updateBy != null">#{updateBy},</if>

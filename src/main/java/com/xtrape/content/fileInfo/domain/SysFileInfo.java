@@ -3,7 +3,7 @@ package com.xtrape.content.fileInfo.domain;
 import com.xtrape.common.core.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 
 /**
  * 文件管理对象 sys_file_info
@@ -11,7 +11,7 @@ import com.xtrape.common.core.domain.BaseEntity;
  * @author xtrape
  * @date 2021-12-29
  */
-public class SysFileInfo extends BaseEntity
+public class SysFileInfo extends BaseEntity2
 {
     private static final long serialVersionUID = 1L;
 

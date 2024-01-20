@@ -1,9 +1,9 @@
 package com.xtrape.content.comment.controller;
 
 import java.util.List;
-import java.util.Set;
 
-import com.xtrape.context.XtrapeContext;
+import com.xtrape.common.core.web.domain.R;
+import com.xtrape.common.core.web.page.PaginationEntity;
 import com.xtrape.context.XtrapeContextHolder;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -15,16 +15,10 @@ import com.xtrape.common.core.web.page.TableDataInfo;
 import com.xtrape.content.comment.domain.CmsCommentLike;
 import com.xtrape.content.comment.service.ICmsCommentService;
 import com.xtrape.system.service.ISysPermissionService;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.xtrape.common.core.web.domain.AjaxResult;
 import com.xtrape.content.comment.domain.CmsComment;
 
@@ -48,20 +42,24 @@ public class CmsCommentController extends BaseController
     /**
      * 首页查询评论列表
      */
-    @GetMapping("/cms/list")
+    @GetMapping("/list")
     public TableDataInfo cmsList(CmsComment cmsComment)
     {
         startPage();
         List<CmsComment> list = cmsCommentService.selectCommentList(cmsComment);
+        TableDataInfo tableDataInfo = new TableDataInfo();
         return getDataTable(list);
     }
 
     /**
      * 首页新增评论
      */
-    @PostMapping("/cms/addComment")
-    public AjaxResult addComment(@RequestBody CmsComment cmsComment)
-    {
+    @PostMapping("/addComment")
+    public AjaxResult addComment(@RequestBody CmsComment cmsComment, @RequestHeader HttpHeaders headers) {
+        String portal = headers.getFirst(XtrapeContextHolder.HEADER_KEY_PORTAL);
+        String member = headers.getFirst(XtrapeContextHolder.HEADER_KEY_MEMBER);
+        cmsComment.setType("0");
+        cmsComment.setUserId(member);
         String parentId = cmsComment.getParentId();
         if (parentId!=null){
             CmsComment comment = cmsCommentService.selectCmsCommentById(parentId);
@@ -93,24 +91,7 @@ public class CmsCommentController extends BaseController
         return toAjax(cmsCommentService.delCmsCommentLike(cmsCommentLike));
     }
 
-    /**
-     * 查询评论管理列表
-     */
-    @PreAuthorize("@ss.hasPermi('cms:comment:list')")
-    @GetMapping("/list")
-    public TableDataInfo list(CmsComment cmsComment)
-    {
-        XtrapeContext requestContext = XtrapeContextHolder.take();
-        // 角色集合
-        Set<String> roles = permissionService.getRolePermission(requestContext.getMember());
-//        if (!RequestContextHolder.isAdmin(getUserId())&&!roles.contains("admin")&&!roles.contains("cms")){
-//            cmsComment.setCreateBy(getUserName());
-//        }
-        cmsComment.setDelFlag("0");
-        startPage();
-        List<CmsComment> list = cmsCommentService.selectCmsCommentList(cmsComment);
-        return getDataTable(list);
-    }
+
 
     /**
      * 导出评论管理列表

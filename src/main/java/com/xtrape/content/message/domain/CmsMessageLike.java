@@ -6,11 +6,9 @@ package com.xtrape.content.message.domain;
  * @Date: 2022/1/19 8:38
  */
 
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * @Author: WangNing
@@ -19,7 +17,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  **/
 @Data
 @Accessors(chain = true)
-public class CmsMessageLike  extends BaseEntity {
+public class CmsMessageLike  extends BaseEntity2 {
 
     private static final long serialVersionUID = 1L;
 

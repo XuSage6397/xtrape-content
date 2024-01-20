@@ -3,9 +3,7 @@ package com.xtrape.content.tag.domain;
 import com.xtrape.common.core.annotation.Excel;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 
 /**
  * 标签管理对象 cms_tag
@@ -15,7 +13,7 @@ import com.xtrape.common.core.domain.BaseEntity;
  */
 @Data
 @Accessors(chain = true)
-public class CmsTag extends BaseEntity
+public class CmsTag extends BaseEntity2
 {
     private static final long serialVersionUID = 1L;
 

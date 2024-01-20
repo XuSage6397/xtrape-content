@@ -1,17 +1,12 @@
 package com.xtrape.content.blog.domain;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.extension.handlers.JacksonTypeHandler;
 import com.xtrape.common.core.annotation.Excel;
 import com.xtrape.content.tag.domain.CmsTag;
 import com.xtrape.content.type.domain.CmsType;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import nonapi.io.github.classgraph.json.Id;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 
 import java.util.List;
 
@@ -23,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class CmsBlog extends BaseEntity {
+public class CmsBlog extends BaseEntity2 {
 
     private static final long serialVersionUID = 1L;
 

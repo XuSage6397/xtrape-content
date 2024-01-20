@@ -2,10 +2,8 @@ package com.xtrape.content.comment.domain;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 import com.xtrape.common.core.annotation.Excel;
-import com.xtrape.common.security.web.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity;
 
 import java.util.List;
 
@@ -60,6 +58,8 @@ public class CmsComment extends BaseEntity
 
     /** 头像 */
     private String avatar;
+
+    String email;
 
     /** 回复 */
     private List<CmsComment> children;

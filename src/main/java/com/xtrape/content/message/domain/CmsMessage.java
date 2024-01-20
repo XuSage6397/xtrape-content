@@ -3,9 +3,7 @@ package com.xtrape.content.message.domain;
 import com.xtrape.common.core.annotation.Excel;
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.xtrape.common.core.domain.BaseEntity;
+import com.xtrape.common.core.web.domain.BaseEntity2;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class CmsMessage extends BaseEntity
+public class CmsMessage extends BaseEntity2
 {
     private static final long serialVersionUID = 1L;
 

@@ -3,6 +3,8 @@ package com.xtrape.content.comment.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.xtrape.common.core.utils.DateUtils;
 import com.xtrape.system.api.domain.SysUser;
 import com.xtrape.content.blog.domain.CmsBlog;
@@ -11,6 +13,10 @@ import com.xtrape.content.comment.domain.CmsCommentLike;
 import com.xtrape.content.comment.mapper.CmsCommentLikeMapper;
 import com.xtrape.content.comment.service.ICmsCommentService;
 import com.xtrape.system.mapper.SysUserMapper;
+import com.xtrape.system.service.member.MemberSchema;
+import com.xtrape.system.service.member.MemberService;
+import com.xtrape.system.service.verify.VerifySchema;
+import com.xtrape.system.service.verify.VerifyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.xtrape.content.comment.mapper.CmsCommentMapper;
@@ -23,7 +29,7 @@ import com.xtrape.content.comment.domain.CmsComment;
  * @date 2022-01-21
  */
 @Service
-public class CmsCommentServiceImpl implements ICmsCommentService
+public class CmsCommentServiceImpl extends ServiceImpl<CmsCommentMapper, CmsComment> implements ICmsCommentService
 {
     @Autowired
     private CmsCommentMapper cmsCommentMapper;
@@ -36,6 +42,12 @@ public class CmsCommentServiceImpl implements ICmsCommentService
 
     @Autowired
     private CmsBlogMapper cmsBlogMapper;
+
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private VerifyService verifyService;
 
     /**
      * 首页查询评论列表
@@ -57,8 +69,8 @@ public class CmsCommentServiceImpl implements ICmsCommentService
             //添加头像
             String userId = comment.getUserId();
             if (userId!=null){
-                SysUser user = sysUserMapper.selectUserById(userId);
-                comment.setAvatar(user.getAvatar());
+//                MemberSchema user = memberService.getById(userId);
+//                comment.setAvatar(user.getAvatar());
             }
             //添加是否被点赞
             if (logUserUserId!=null){
@@ -72,6 +84,12 @@ public class CmsCommentServiceImpl implements ICmsCommentService
                     comment.setIsLike(false);
                 }
             }
+            if (comment.getBlogId() != null) {
+                CmsBlog blog = cmsBlogMapper.selectCmsBlogById(comment.getBlogId());
+                if (blog != null) {
+                    comment.setBlogTitle(blog.getTitle());
+                }
+            }
             //添加子评论(回复)
             CmsComment childComment = new CmsComment();
             childComment.setType("1");
@@ -82,7 +100,7 @@ public class CmsCommentServiceImpl implements ICmsCommentService
                     //添加头像
                     String childUserId = childListComment.getUserId();
                     if (childUserId!=null){
-                        SysUser user = sysUserMapper.selectUserById(childUserId);
+                        MemberSchema user = memberService.getById(childUserId);
                         childListComment.setAvatar(user.getAvatar());
                     }
                     //添加是否被点赞
@@ -192,8 +210,14 @@ public class CmsCommentServiceImpl implements ICmsCommentService
             //添加头像
             String userId = comment.getUserId();
             if (userId!=null){
-                SysUser user = sysUserMapper.selectUserById(userId);
+                MemberSchema user = memberService.getById(userId);
                 comment.setAvatar(user.getAvatar());
+                comment.setCreateBy(user.getNickname());
+                VerifySchema verifySchema = verifyService.getOne(new QueryWrapper<VerifySchema>()
+                        .eq("member", userId)
+                        .last("LIMIT 1")
+                );
+                comment.setEmail(verifySchema.getAccount());
             }
             //添加父评论信息
             String parentId = comment.getParentId();
@@ -235,13 +259,14 @@ public class CmsCommentServiceImpl implements ICmsCommentService
     @Override
     public int insertCmsComment(CmsComment cmsComment)
     {
-        String createBy = cmsComment.getCreateBy();
-        if (createBy!=null&&!"".equals(createBy)){
-            SysUser user = sysUserMapper.selectUserByUserName(createBy);
-            if (user!=null){
-                cmsComment.setUserId(user.getUserId());
-            }
-        }
+        MemberSchema memberSchema = memberService.getById(cmsComment.getUserId());
+        cmsComment.setAvatar(memberSchema.getAvatar());
+        cmsComment.setCreateBy(memberSchema.getNickname());
+        VerifySchema verifySchema = verifyService.getOne(new QueryWrapper<VerifySchema>()
+                .eq("member", cmsComment.getUserId())
+                .last("LIMIT 1")
+        );
+        cmsComment.setEmail(verifySchema.getAccount());
         cmsComment.setCreateTime(DateUtils.getNowDate());
         return cmsCommentMapper.insertCmsComment(cmsComment);
     }
