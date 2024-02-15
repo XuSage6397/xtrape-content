@@ -195,7 +195,7 @@ public class CmsBlogController extends BaseController {
     /**
      * 新增文章管理
      */
-    @PreAuthorize("@ss.hasPermi('cms:blog:add')")
+//    @PreAuthorize("@ss.hasPermi('cms:blog:add')")
     @Log2(title = "文章管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody CmsBlog cmsBlog) {
@@ -215,7 +215,7 @@ public class CmsBlogController extends BaseController {
     /**
      * 修改文章管理
      */
-    @PreAuthorize("@ss.hasPermi('cms:blog:edit')")
+//    @PreAuthorize("@ss.hasPermi('cms:blog:edit')")
     @Log2(title = "文章管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody CmsBlog cmsBlog) {
